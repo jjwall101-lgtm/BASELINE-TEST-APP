@@ -63,3 +63,7 @@ This version lets the user upload a profile photo in Settings. The photo is crop
 ## Theme pack
 
 This local-only test version includes Plain, Retro / Mario-style, Space, Minecraft-style, and Bunny themes. Change the theme from Settings after unlocking Parent Mode. Theme choice is saved locally on the device.
+
+## Familiar child-app layout update
+
+This test build keeps the Together Steps branding, local-only saving, coin reward system, profile photo upload, timer, calendar, family tree, and theme pack, but switches the interface back closer to the earlier child-app layout: bigger rounded cards, stronger child dashboard, chunky navigation, and the familiar traffic-light home view.

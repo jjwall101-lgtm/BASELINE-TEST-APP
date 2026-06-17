@@ -1634,3 +1634,800 @@ html[data-theme="minecraft"] .hero::after {
   opacity: .72;
   pointer-events: none;
 }
+
+
+/* =========================================================
+   FAMILIAR CHILD APP LAYOUT OVERRIDE
+   Brings the test app back closer to the earlier child-app
+   layout: chunky rounded cards, big child dashboard, playful
+   but still clean parent/child structure.
+   ========================================================= */
+
+:root,
+html[data-theme="plain"] {
+  --outline: #172033;
+  --card: #ffffff;
+  --card-soft: #f8fbff;
+  --bg: linear-gradient(180deg, #eaf6ff 0%, #f9fbff 46%, #edf7ef 100%);
+  --text: #172033;
+  --muted: #5b677a;
+  --border: #172033;
+  --border-soft: rgba(23, 32, 51, 0.16);
+  --primary: #2f7ee6;
+  --primary-dark: #1f5ab3;
+  --success: #2bbf6a;
+  --success-soft: #ddffe9;
+  --warning: #ffbf3f;
+  --warning-soft: #fff3c8;
+  --danger: #ff5f57;
+  --danger-soft: #ffe3e1;
+  --shadow: 5px 5px 0 rgba(23, 32, 51, 0.95), 0 16px 28px rgba(23, 32, 51, 0.12);
+  --soft-shadow: 3px 3px 0 rgba(23, 32, 51, 0.9);
+  --radius: 24px;
+}
+
+body {
+  background: var(--bg);
+}
+
+.app {
+  width: min(100%, 560px);
+  padding: 12px 10px 96px;
+}
+
+.hero,
+.coin-card,
+.streak-card,
+.behaviour-card,
+.treat-card,
+.rewards-shop-card,
+.parent-page-card,
+.history-card,
+.reports-card,
+.settings-card,
+.parent-panel,
+.chart-card,
+.child-dashboard-card,
+.calendar-card,
+.feelings-card,
+.family-tree-card,
+.timer-card {
+  border: 4px solid var(--outline);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.93);
+  margin-bottom: 14px;
+}
+
+.hero {
+  padding: 14px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-top-row {
+  align-items: center;
+  min-height: 38px;
+}
+
+.sync-pill,
+.small-parent-button,
+.parent-hint,
+.streak-best,
+.mode-status-pill,
+.section-title,
+.panel-title,
+.child-welcome,
+.family-branch-title {
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 999px;
+  font-weight: 950;
+}
+
+.small-parent-button,
+.nav-button.active,
+.notification-controls button,
+.collect-prize-button,
+.claim-reward-button,
+.calendar-editor-buttons button,
+.family-tree-editor button,
+#saveQuickLogButton,
+.reward-request-actions button,
+.pin-pad-actions button:last-child {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--outline);
+}
+
+.app-icon-preview {
+  width: 112px;
+  height: 112px;
+  margin: 8px auto 10px;
+  border: 4px solid var(--outline);
+  border-radius: 28px;
+  box-shadow: var(--soft-shadow);
+  object-fit: cover;
+}
+
+h1 {
+  margin: 8px 0 6px;
+  font-size: clamp(34px, 9vw, 46px);
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+.profile-photo-card {
+  width: min(100%, 260px);
+  margin: 10px auto 8px;
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 26px;
+  padding: 10px;
+  background: rgba(255,255,255,0.78);
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.profile-photo-preview,
+.profile-photo-placeholder {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  border: 4px solid var(--outline);
+  box-shadow: 3px 3px 0 var(--outline);
+}
+
+.profile-photo-placeholder {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #e9f3ff, #d7eaff);
+  color: var(--primary);
+  font-size: 42px;
+}
+
+.profile-photo-card p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--muted);
+}
+
+.plain-header-line {
+  width: 132px;
+  height: 8px;
+  margin: 14px auto 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), #1fb6a6, #ffd45a);
+}
+
+/* Navigation like the original child apps: simple big buttons */
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px;
+  border: 4px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+}
+
+.nav-button,
+button,
+.coin-controls button,
+.reset-button,
+.level-card,
+.locked-panel button,
+.note-form button,
+.reward-form button,
+.category-form button,
+.history-header button,
+.reports-card button,
+.settings-card button,
+.reward-editor-buttons button,
+.delete-note-button,
+.edit-note-button,
+.timer-actions button,
+.timer-presets button,
+.pin-keypad button,
+.pin-pad-actions button {
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 16px;
+  padding: 11px 10px;
+  font-weight: 950;
+}
+
+.nav-button {
+  font-size: 12px;
+  min-height: 46px;
+}
+
+button:active,
+.nav-button:active,
+.level-card:active,
+.reward-shop-item:active,
+.calendar-day:active,
+.feeling-face:active {
+  transform: translateY(3px) scale(0.99);
+  box-shadow: 1px 1px 0 var(--outline) !important;
+}
+
+body.child-mode .app-nav {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.child-mode .nav-button {
+  font-size: 14px;
+  min-height: 54px;
+}
+
+body.child-mode .sync-pill,
+body.child-mode .theme-switcher,
+body.child-mode .coin-controls,
+body.child-mode .notification-controls,
+body.child-mode .parent-hint,
+body.child-mode .reset-button,
+body.child-mode .level-labels,
+body.child-mode #behaviourCategorySelect,
+body.child-mode #behaviourReasonText,
+body.child-mode .behaviour-card label,
+body.child-mode .history-card,
+body.child-mode .parent-page-card,
+body.child-mode .reports-card,
+body.child-mode .settings-card {
+  display: none !important;
+}
+
+body.child-mode .profile-top-row {
+  justify-content: center;
+}
+
+body.child-mode .small-parent-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+body.parent-mode .app-nav {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Top child dashboard: familiar coin bank + streak blocks */
+.child-mode-only {
+  display: none;
+}
+
+body.child-mode .child-mode-only {
+  display: block;
+}
+
+body.parent-mode .child-mode-only {
+  display: none !important;
+}
+
+body.child-mode .hero-child-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px auto 8px;
+  max-width: 360px;
+}
+
+.hero-child-stat {
+  border: 4px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 24px;
+  padding: 13px 8px;
+  text-align: center;
+}
+
+.hero-child-stat span {
+  display: block;
+  font-size: 44px;
+  font-weight: 950;
+  line-height: 0.95;
+}
+
+.hero-child-stat small {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.hero-child-coins {
+  background: linear-gradient(180deg, #fff9c8, #ffd95a);
+}
+
+.hero-child-streak {
+  background: linear-gradient(180deg, #dcffe9, #87e99f);
+}
+
+.child-dashboard-card {
+  text-align: center;
+}
+
+body.child-mode .child-today-card {
+  display: block !important;
+  padding: 16px 12px 18px;
+}
+
+body.child-mode[data-active-page="rewards"] .child-today-card,
+body.child-mode[data-active-page="calendar"] .child-today-card,
+body.child-mode[data-active-page="feelings"] .child-today-card,
+body.child-mode[data-active-page="timer"] .child-today-card,
+body.child-mode[data-active-page="family"] .child-today-card {
+  display: none !important;
+}
+
+.child-next-reward,
+.next-reward,
+.latest-feeling-child,
+.family-today-card,
+.calendar-day-details,
+.timer-status,
+.streak-message,
+.parent-hint {
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+  padding: 12px;
+  font-weight: 900;
+}
+
+.child-status-row {
+  display: grid;
+  gap: 10px;
+}
+
+.child-status-row-single {
+  max-width: 240px;
+  margin: 10px auto 0;
+}
+
+.child-status-row div,
+.dashboard-stat,
+.report-stat {
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+}
+
+.child-status-row strong,
+.dashboard-stat strong,
+.report-stat strong {
+  font-size: 28px;
+  font-weight: 950;
+}
+
+/* Home layout similar to earlier app: big progress + traffic light */
+body.child-mode #page-home .coin-card {
+  display: none;
+}
+
+.coin-count {
+  font-size: 58px;
+  font-weight: 950;
+  line-height: 1;
+  text-align: center;
+}
+
+.progress-outer {
+  height: 28px;
+  border: 3px solid var(--outline);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.72);
+}
+
+.progress-inner {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+}
+
+.journey-track {
+  height: 72px;
+  border: 3px solid var(--outline);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #bdeeff 0 56%, #7ee084 57% 76%, #8f6738 77% 100%);
+  overflow: hidden;
+}
+
+.journey-character {
+  font-size: 36px;
+}
+
+.today-level-pill {
+  display: block;
+  width: fit-content;
+  margin: 10px auto 16px;
+  padding: 10px 20px;
+  border: 4px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 999px;
+  font-size: 26px;
+  font-weight: 950;
+}
+
+.traffic-light {
+  width: min(100%, 230px);
+  margin: 12px auto 10px;
+  padding: 12px;
+  border: 5px solid var(--outline);
+  border-radius: 30px;
+  background: linear-gradient(180deg, #263044, #101828);
+}
+
+.light {
+  width: 128px;
+  height: 128px;
+  margin: 14px auto;
+  border-radius: 50%;
+  border: 6px solid var(--outline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .28;
+  font-size: 56px;
+  font-weight: 950;
+}
+
+.light.active {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 0 24px currentColor, inset 7px 7px 0 rgba(255,255,255,0.24);
+}
+
+.red { background: var(--danger); color: var(--danger); }
+.amber { background: var(--warning); color: var(--warning); }
+.green { background: var(--success); color: var(--success); }
+.light span { color: #fff; text-shadow: 2px 2px 0 rgba(0,0,0,0.18); }
+
+body.child-mode .traffic-light {
+  pointer-events: none;
+}
+
+body.child-mode .light:not(.active) {
+  opacity: .16;
+}
+
+.level-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.level-card {
+  min-height: 82px;
+}
+
+.level-card strong,
+.level-card span {
+  display: block;
+}
+
+.red-card { background: #ffe3e1; }
+.amber-card { background: #fff3c8; }
+.green-card { background: #dcffe9; }
+
+/* Rewards, feelings, calendar, family and timer as big child cards */
+.reward-shop-item,
+.parent-note-item,
+.reward-editor-item,
+.category-item,
+.history-item,
+.reward-request-item,
+.parent-feeling-item,
+.family-tree-person,
+.family-member-editor-item,
+.report-stat {
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+}
+
+.reward-shop-item {
+  grid-template-columns: 64px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.reward-shop-icon {
+  width: 64px;
+  height: 64px;
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 18px;
+  font-size: 34px;
+}
+
+body.child-mode .reward-shop-item {
+  grid-template-columns: 70px 1fr;
+}
+
+body.child-mode .claim-reward-button {
+  grid-column: 1 / -1;
+  min-height: 48px;
+}
+
+.feelings-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.feeling-face {
+  min-height: 142px;
+  border: 4px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 28px;
+  font-weight: 950;
+}
+
+.feeling-emoji {
+  width: 82px;
+  height: 82px;
+  border: 4px solid var(--outline);
+  border-radius: 50%;
+  font-size: 46px;
+}
+
+.family-calendar-grid,
+.calendar-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.family-calendar-day,
+.calendar-day {
+  min-height: 132px;
+  border: 3px solid var(--outline);
+  box-shadow: var(--soft-shadow);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.82);
+}
+
+.family-calendar-day.today,
+.calendar-day.today,
+.family-calendar-day.selected,
+.calendar-day.selected {
+  outline: 5px solid var(--primary);
+  outline-offset: -8px;
+}
+
+.family-calendar-day.has-plan,
+.calendar-day.has-plan,
+.reward-affordable {
+  background: var(--success-soft);
+}
+
+.calendar-person,
+.calendar-detail-icon,
+.family-person-icon,
+.parent-feeling-icon,
+.family-member-editor-icon,
+.reward-shop-icon {
+  background: #fff;
+  color: var(--text);
+}
+
+.family-today-card .calendar-detail-main,
+.calendar-detail-main {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+}
+
+.timer-ring {
+  width: 230px;
+  height: 230px;
+  margin: 12px auto;
+  border: 5px solid var(--outline);
+  box-shadow: var(--shadow);
+  border-radius: 50%;
+}
+
+.timer-time,
+#timerTime {
+  font-size: 42px;
+  font-weight: 950;
+}
+
+.timer-presets,
+.timer-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.family-tree-main-person {
+  width: min(100%, 330px);
+  margin-inline: auto;
+  background: linear-gradient(180deg, #fff9c8, #ffd95a);
+}
+
+.family-tree-branches {
+  display: grid;
+  gap: 14px;
+}
+
+/* Theme-specific familiar surfaces */
+html[data-theme="mario"] {
+  --bg: linear-gradient(180deg, #79d8ff 0%, #bdf2ff 44%, #69d45d 45%, #47aa45 100%);
+  --primary: #f97316;
+  --card: #fff7d6;
+  --card-soft: #fffbe8;
+  --shadow: 5px 5px 0 #172033, 0 16px 28px rgba(23,32,51,.16);
+}
+
+html[data-theme="space"] {
+  --bg:
+    radial-gradient(circle at 20% 18%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 24%, rgba(255,255,255,.75) 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 62%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+    linear-gradient(180deg, #0e1244 0%, #090b2f 55%, #171d68 100%);
+  --card: #111b5c;
+  --card-soft: #18236e;
+  --text: #ffffff;
+  --muted: #c7d7ff;
+  --outline: #030617;
+  --border: rgba(255,255,255,.22);
+  --border-soft: rgba(255,255,255,.16);
+  --primary: #45d8ff;
+  --shadow: 5px 5px 0 #020316, 0 16px 30px rgba(0,0,0,.32);
+  --soft-shadow: 3px 3px 0 #020316;
+}
+
+html[data-theme="minecraft"] {
+  --bg: linear-gradient(180deg, #7ccfff 0 32%, #7bdd62 33% 62%, #8b5b38 63% 100%);
+  --card: #d8c08a;
+  --card-soft: #efe0ad;
+  --primary: #5cae40;
+  --shadow: 5px 5px 0 #172033, 0 16px 28px rgba(23,32,51,.18);
+}
+
+html[data-theme="bunny"] {
+  --bg:
+    radial-gradient(circle at 16% 12%, rgba(255,255,255,.9) 0 30px, transparent 31px),
+    radial-gradient(circle at 86% 20%, rgba(255,255,255,.72) 0 24px, transparent 25px),
+    linear-gradient(180deg, #fff1f8 0%, #ffe4f1 52%, #d9f99d 53%, #bbf7d0 100%);
+  --card: #fff7fb;
+  --card-soft: #fff0f7;
+  --text: #3b1731;
+  --muted: #7a486b;
+  --outline: #5b1b43;
+  --border: #f9a8d4;
+  --border-soft: rgba(249,168,212,.46);
+  --primary: #ec4899;
+  --shadow: 5px 5px 0 #5b1b43, 0 16px 30px rgba(236,72,153,.14);
+  --soft-shadow: 3px 3px 0 #5b1b43;
+}
+
+html[data-theme="space"] .hero,
+html[data-theme="space"] .coin-card,
+html[data-theme="space"] .streak-card,
+html[data-theme="space"] .behaviour-card,
+html[data-theme="space"] .treat-card,
+html[data-theme="space"] .rewards-shop-card,
+html[data-theme="space"] .parent-page-card,
+html[data-theme="space"] .history-card,
+html[data-theme="space"] .reports-card,
+html[data-theme="space"] .settings-card,
+html[data-theme="space"] .parent-panel,
+html[data-theme="space"] .chart-card,
+html[data-theme="space"] .child-dashboard-card,
+html[data-theme="space"] .calendar-card,
+html[data-theme="space"] .feelings-card,
+html[data-theme="space"] .family-tree-card,
+html[data-theme="space"] .timer-card {
+  color: #fff;
+}
+
+html[data-theme="space"] .child-next-reward,
+html[data-theme="space"] .next-reward,
+html[data-theme="space"] .latest-feeling-child,
+html[data-theme="space"] .family-today-card,
+html[data-theme="space"] .calendar-day-details,
+html[data-theme="space"] .timer-status,
+html[data-theme="space"] .reward-shop-item,
+html[data-theme="space"] .parent-note-item,
+html[data-theme="space"] .history-item,
+html[data-theme="space"] .family-tree-person,
+html[data-theme="space"] .profile-photo-card,
+html[data-theme="space"] .child-status-row div,
+html[data-theme="space"] .dashboard-stat,
+html[data-theme="space"] .report-stat,
+html[data-theme="space"] input,
+html[data-theme="space"] select,
+html[data-theme="space"] textarea,
+html[data-theme="space"] .nav-button {
+  background: #18236e;
+  color: #fff;
+}
+
+html[data-theme="minecraft"] .hero,
+html[data-theme="minecraft"] .coin-card,
+html[data-theme="minecraft"] .streak-card,
+html[data-theme="minecraft"] .behaviour-card,
+html[data-theme="minecraft"] .treat-card,
+html[data-theme="minecraft"] .rewards-shop-card,
+html[data-theme="minecraft"] .parent-page-card,
+html[data-theme="minecraft"] .history-card,
+html[data-theme="minecraft"] .reports-card,
+html[data-theme="minecraft"] .settings-card,
+html[data-theme="minecraft"] .parent-panel,
+html[data-theme="minecraft"] .chart-card,
+html[data-theme="minecraft"] .child-dashboard-card,
+html[data-theme="minecraft"] .calendar-card,
+html[data-theme="minecraft"] .feelings-card,
+html[data-theme="minecraft"] .family-tree-card,
+html[data-theme="minecraft"] .timer-card,
+html[data-theme="minecraft"] .nav-button,
+html[data-theme="minecraft"] .calendar-day,
+html[data-theme="minecraft"] .reward-shop-item,
+html[data-theme="minecraft"] .family-tree-person {
+  border-radius: 14px;
+}
+
+html[data-theme="mario"] .plain-header-line { background: repeating-linear-gradient(90deg, #f97316 0 20px, #ffd447 20px 40px, #36d45a 40px 60px); }
+html[data-theme="space"] .plain-header-line { background: linear-gradient(90deg, #45d8ff, #a78bfa, #f0abfc); }
+html[data-theme="minecraft"] .plain-header-line { background: repeating-linear-gradient(90deg, #5cae40 0 18px, #7b4a2a 18px 36px); border-radius: 3px; }
+html[data-theme="bunny"] .plain-header-line { background: linear-gradient(90deg, #f9a8d4, #fb7185, #f59e0b); }
+
+html[data-theme="mario"] .hero::after { content: "🌟"; }
+html[data-theme="space"] .hero::after { content: "🚀"; }
+html[data-theme="minecraft"] .hero::after { content: "⛏️"; }
+html[data-theme="bunny"] .hero::after { content: "🐰"; }
+
+html[data-theme="mario"] .hero::after,
+html[data-theme="space"] .hero::after,
+html[data-theme="minecraft"] .hero::after,
+html[data-theme="bunny"] .hero::after {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  font-size: 30px;
+  opacity: .72;
+  pointer-events: none;
+}
+
+html[data-theme="bunny"] .hero-child-coins small::before { content: "🥕 "; }
+html[data-theme="mario"] .hero-child-coins small::before { content: "🌟 "; }
+html[data-theme="space"] .hero-child-coins small::before { content: "🪐 "; }
+html[data-theme="minecraft"] .hero-child-coins small::before { content: "💎 "; }
+
+@media (min-width: 520px) {
+  .feelings-grid { grid-template-columns: repeat(3, 1fr); }
+  .family-calendar-grid,
+  .calendar-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 390px) {
+  .app { padding-inline: 8px; }
+  h1 { font-size: 34px; }
+  body.child-mode .app-nav { grid-template-columns: repeat(2, 1fr); max-width: 340px; }
+  .hero-child-stat span { font-size: 38px; }
+  .light { width: 112px; height: 112px; }
+  .traffic-light { width: 208px; }
+  .timer-ring { width: 205px; height: 205px; }
+}

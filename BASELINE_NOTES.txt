@@ -7,3 +7,7 @@ No personal child image, personal names, or creator branding are included.
 
 
 Theme pack added: Plain, Retro / Mario-style, Space, Minecraft-style, and Bunny. Firebase is still removed; saving remains local-only.
+
+## Familiar child-app layout update
+
+This test build keeps the Together Steps branding, local-only saving, coin reward system, profile photo upload, timer, calendar, family tree, and theme pack, but switches the interface back closer to the earlier child-app layout: bigger rounded cards, stronger child dashboard, chunky navigation, and the familiar traffic-light home view.
