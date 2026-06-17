@@ -1,0 +1,1275 @@
+* {
+  box-sizing: border-box;
+}
+
+:root,
+html[data-theme="plain"] {
+  --bg: #f7f8fa;
+  --card: #ffffff;
+  --card-soft: #f9fafb;
+  --text: #101828;
+  --muted: #667085;
+  --border: #d0d5dd;
+  --border-soft: #e4e7ec;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --success: #12b76a;
+  --success-soft: #ecfdf3;
+  --warning: #f79009;
+  --warning-soft: #fffaeb;
+  --danger: #f04438;
+  --danger-soft: #fef3f2;
+  --shadow: 0 8px 22px rgba(16, 24, 40, 0.08);
+  --radius: 18px;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.app {
+  width: min(100%, 620px);
+  margin: 0 auto;
+  padding: 14px 12px 84px;
+}
+
+.hero,
+.coin-card,
+.streak-card,
+.behaviour-card,
+.treat-card,
+.rewards-shop-card,
+.parent-page-card,
+.history-card,
+.reports-card,
+.settings-card,
+.parent-panel,
+.chart-card,
+.child-dashboard-card,
+.calendar-card,
+.feelings-card,
+.family-tree-card,
+.timer-card {
+  background: var(--card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.hero {
+  padding: 18px 16px;
+}
+
+.profile-top-row,
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.app-icon-preview {
+  width: 82px;
+  height: 82px;
+  display: block;
+  margin: 10px 0;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  object-fit: cover;
+  background: var(--card-soft);
+}
+
+h1 {
+  margin: 6px 0 8px;
+  font-size: 30px;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.plain-header-line {
+  width: 68px;
+  height: 4px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: var(--primary);
+}
+
+.power-row,
+.theme-switcher,
+.ground,
+.app-signature,
+.jay-signature {
+  display: none !important;
+}
+
+.sync-pill,
+.small-parent-button,
+.parent-hint,
+.streak-best,
+.mode-status-pill,
+.section-title,
+.panel-title,
+.child-welcome,
+.family-branch-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-soft);
+  color: #344054;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.section-title {
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.panel-title {
+  margin-bottom: 10px;
+}
+
+.sync-pill.online {
+  background: var(--success-soft);
+  color: #067647;
+  border-color: #abefc6;
+}
+
+.sync-pill.offline {
+  background: var(--warning-soft);
+  color: #b54708;
+  border-color: #fedf89;
+}
+
+.sync-pill.error {
+  background: var(--danger-soft);
+  color: #b42318;
+  border-color: #fecdca;
+}
+
+.small-parent-button,
+button.primary,
+.notification-controls button,
+.collect-prize-button,
+.claim-reward-button,
+.calendar-editor-buttons button,
+.family-tree-editor button,
+#saveQuickLogButton,
+.reward-request-actions button,
+.pin-pad-actions button:last-child,
+.nav-button.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 8px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.07);
+  backdrop-filter: blur(8px);
+}
+
+.nav-button,
+button,
+.coin-controls button,
+.reset-button,
+.level-card,
+.locked-panel button,
+.note-form button,
+.reward-form button,
+.category-form button,
+.history-header button,
+.reports-card button,
+.settings-card button,
+.reward-editor-buttons button,
+.delete-note-button,
+.edit-note-button,
+.timer-actions button,
+.timer-presets button,
+.pin-keypad button,
+.pin-pad-actions button {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+  color: #344054;
+  padding: 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:active,
+.nav-button:active {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-button {
+  padding: 10px 6px;
+  font-size: 13px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--text);
+  padding: 10px 12px;
+  font-weight: 650;
+}
+
+textarea {
+  resize: vertical;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #344054;
+}
+
+.small-copy,
+.empty-notes,
+.next-reward,
+.rewards-shop-subtitle,
+.feelings-subtitle,
+.latest-feeling-child,
+.calendar-subtitle,
+.family-tree-subtitle,
+.timer-subtitle,
+.streak-message,
+.notification-controls p,
+#settingsNotificationStatus,
+#authStatus {
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.coin-count {
+  margin: 8px 0 12px;
+  font-size: 52px;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1;
+}
+
+.coin-count small {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.progress-outer,
+.journey-track,
+.bar-track {
+  width: 100%;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: #f2f4f7;
+  overflow: hidden;
+}
+
+.progress-outer {
+  height: 18px;
+}
+
+.progress-inner,
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--primary);
+  transition: width 0.2s ease;
+}
+
+.journey-wrap {
+  margin-top: 12px;
+}
+
+.journey-track {
+  position: relative;
+  height: 58px;
+  border-radius: 14px;
+}
+
+.journey-start,
+.finish-line {
+  position: absolute;
+  bottom: 8px;
+  z-index: 2;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.journey-start {
+  left: 8px;
+}
+
+.finish-line {
+  right: 8px;
+}
+
+.journey-character {
+  position: absolute;
+  left: 0%;
+  top: 12px;
+  z-index: 3;
+  color: var(--primary);
+  font-size: 28px;
+  transition: left 0.2s ease;
+}
+
+.coin-controls,
+.timer-actions,
+.timer-presets,
+.auth-buttons,
+.note-actions,
+.reward-editor-buttons,
+.calendar-editor-buttons,
+.reward-request-actions,
+.family-member-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.coin-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 12px;
+}
+
+.coin-controls button:nth-child(n+4) {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.notification-controls {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.streak-main {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0;
+  font-weight: 900;
+}
+
+.streak-main span:first-child {
+  font-size: 48px;
+}
+
+.streak-best {
+  display: flex;
+  margin: 10px auto 0;
+}
+
+.today-level-pill {
+  width: fit-content;
+  margin: 12px auto;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--warning-soft);
+  color: #b54708;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.traffic-light {
+  width: 100%;
+  max-width: 360px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 18px auto;
+}
+
+.light {
+  width: 82px;
+  height: 82px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 900;
+  opacity: 0.3;
+}
+
+.light.active {
+  opacity: 1;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
+}
+
+.red,
+.red-card {
+  background: var(--danger-soft);
+  color: #b42318;
+}
+
+.light.red {
+  background: var(--danger);
+  color: white;
+}
+
+.amber,
+.amber-card {
+  background: var(--warning-soft);
+  color: #b54708;
+}
+
+.light.amber {
+  background: var(--warning);
+  color: white;
+}
+
+.green,
+.green-card {
+  background: var(--success-soft);
+  color: #067647;
+}
+
+.light.green {
+  background: var(--success);
+  color: white;
+}
+
+.level-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.level-card {
+  min-height: 74px;
+}
+
+.level-card strong,
+.level-card span {
+  display: block;
+}
+
+.reset-button {
+  margin-top: 12px;
+}
+
+.treat-card {
+  display: none;
+  text-align: center;
+}
+
+.treat-card.show {
+  display: block;
+}
+
+.prize-drop {
+  margin: 16px auto 10px;
+  padding: 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--card-soft);
+}
+
+.prize-drop-icon {
+  font-size: 48px;
+}
+
+.prize-drop-name {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.locked-panel {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.parent-unlocked-content,
+.settings-unlocked-content,
+.note-form,
+.reward-form,
+.category-form,
+.parent-notes-list,
+.reward-editor-list,
+.rewards-list,
+.category-list,
+#historyList,
+.reward-request-list,
+.parent-feelings-list,
+.family-member-editor-list {
+  display: grid;
+  gap: 10px;
+}
+
+.parent-unlocked-content,
+.settings-unlocked-content {
+  margin-top: 12px;
+}
+
+.parent-note-item,
+.reward-editor-item,
+.reward-shop-item,
+.category-item,
+.history-item,
+.report-stat,
+.dashboard-stat,
+.reward-request-item,
+.parent-feeling-item,
+.family-member-editor-item {
+  padding: 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--card-soft);
+}
+
+.parent-note-meta,
+.history-meta {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.parent-note-text,
+.history-text {
+  white-space: pre-wrap;
+  line-height: 1.4;
+  margin: 0 0 8px;
+}
+
+.delete-note-button,
+.delete-reward-button,
+.danger-panel button,
+#clearAllDataButton,
+#clearHistoryButton,
+#deleteCalendarEntryButton,
+.cancel-family-edit-button,
+.family-member-editor-actions .delete-family-member-button,
+.reward-request-actions .reject-request-button {
+  background: var(--danger-soft);
+  color: #b42318;
+  border-color: #fecdca;
+}
+
+.edit-note-button {
+  background: var(--warning-soft);
+  color: #b54708;
+  border-color: #fedf89;
+}
+
+.reward-shop-item,
+.reward-request-item,
+.parent-feeling-item,
+.family-tree-person,
+.family-member-editor-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.reward-request-item,
+.family-member-editor-item {
+  grid-template-columns: 1fr auto;
+}
+
+.reward-shop-icon,
+.parent-feeling-icon,
+.family-person-icon,
+.family-member-editor-icon,
+.calendar-detail-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #ffffff;
+  font-size: 28px;
+}
+
+.reward-shop-info {
+  display: grid;
+  gap: 4px;
+}
+
+.reward-shop-info small {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.reward-affordable {
+  background: var(--success-soft);
+  border-color: #abefc6;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.report-summary,
+.parent-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.report-stat strong,
+.dashboard-stat strong {
+  display: block;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.report-stat span,
+.dashboard-stat span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bar-chart {
+  display: grid;
+  gap: 8px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 86px 1fr 38px;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bar-track {
+  height: 18px;
+}
+
+/* Child mode */
+.child-mode-only {
+  display: none;
+}
+
+body.child-mode .child-mode-only {
+  display: block;
+}
+
+body.parent-mode .child-mode-only {
+  display: none !important;
+}
+
+.parent-mode-only {
+  display: none !important;
+}
+
+body.parent-mode .parent-mode-only {
+  display: block !important;
+}
+
+body.child-mode .sync-pill,
+body.child-mode .coin-controls,
+body.child-mode .notification-controls,
+body.child-mode .parent-hint,
+body.child-mode .reset-button,
+body.child-mode .level-labels,
+body.child-mode #behaviourCategorySelect,
+body.child-mode #behaviourReasonText,
+body.child-mode .behaviour-card label,
+body.child-mode .history-card,
+body.child-mode .parent-page-card,
+body.child-mode .reports-card,
+body.child-mode .settings-card,
+body.child-mode .calendar-editor,
+body.child-mode .family-tree-editor {
+  display: none !important;
+}
+
+body.child-mode .profile-top-row {
+  justify-content: space-between;
+}
+
+body.child-mode .app-nav {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+body.child-mode .coin-card,
+.streak-card,
+body.child-mode .child-today-card .child-status-row {
+  display: none !important;
+}
+
+body.child-mode[data-active-page="home"] .child-today-card {
+  display: block !important;
+}
+
+body.child-mode[data-active-page="rewards"] .child-today-card,
+body.child-mode[data-active-page="calendar"] .child-today-card,
+body.child-mode[data-active-page="feelings"] .child-today-card,
+body.child-mode[data-active-page="timer"] .child-today-card,
+body.child-mode[data-active-page="family"] .child-today-card {
+  display: none !important;
+}
+
+.hero-child-stats {
+  display: none;
+}
+
+body.child-mode .hero-child-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+
+.hero-child-stat,
+.child-next-reward,
+.child-status-row div,
+.latest-feeling-child,
+.family-today-card,
+.calendar-day-details {
+  padding: 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--card-soft);
+}
+
+.hero-child-stat span {
+  display: block;
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.hero-child-stat small {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.hero-child-coins,
+.hero-child-coins,
+.hero-child-streak {
+  background: var(--success-soft);
+  color: #067647;
+  border-color: #abefc6;
+}
+
+.child-next-reward {
+  margin-top: 12px;
+  font-weight: 800;
+}
+
+.child-feeling-text {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.child-feeling-face {
+  width: 82px;
+  height: 82px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.child-feeling-face span {
+  font-size: 46px;
+}
+
+body.child-mode .traffic-light {
+  pointer-events: none;
+}
+
+body.child-mode .claim-reward-button {
+  display: block;
+  grid-column: 1 / -1;
+}
+
+body.child-mode .claim-reward-button:not(:disabled)::after {
+  content: " for parent";
+}
+
+/* Feelings */
+.feelings-card,
+.calendar-card,
+.family-tree-card,
+.timer-card {
+  text-align: center;
+}
+
+.feelings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.feeling-face {
+  min-height: 130px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 12px;
+  font-weight: 900;
+}
+
+.feeling-emoji {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #ffffff;
+  font-size: 40px;
+}
+
+.feeling-yellow { background: #fffaeb; }
+.feeling-blue { background: #eff8ff; }
+.feeling-red { background: #fef3f2; }
+.feeling-purple { background: #f4f3ff; }
+.feeling-grey { background: #f2f4f7; }
+.feeling-navy { background: #eef4ff; }
+.feeling-orange { background: #fff6ed; }
+.feeling-green { background: #ecfdf3; }
+.feeling-teal { background: #f0fdfa; }
+.feeling-pink { background: #fdf2fa; }
+
+/* Calendar */
+.family-calendar-grid,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.family-calendar-day,
+.calendar-day {
+  min-height: 124px;
+  padding: 10px 8px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--card-soft);
+  text-align: center;
+}
+
+.family-calendar-day.today,
+.calendar-day.today {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.family-calendar-day.selected,
+.calendar-day.selected {
+  background: #eff6ff;
+  border-color: var(--primary);
+}
+
+.family-calendar-day.has-plan,
+.calendar-day.has-plan {
+  background: var(--success-soft);
+  border-color: #abefc6;
+}
+
+.calendar-weekday,
+.calendar-month {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.family-calendar-day strong,
+.calendar-day strong {
+  display: block;
+  margin: 4px 0;
+  font-size: 28px;
+}
+
+.calendar-person {
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.calendar-person-icon {
+  display: block;
+  font-size: 22px;
+}
+
+.calendar-person-name {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.family-today-card {
+  margin: 12px 0;
+  text-align: left;
+}
+
+.calendar-detail-main,
+.family-today-card .calendar-detail-main {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.calendar-detail-main strong,
+.calendar-detail-main span {
+  display: block;
+  font-weight: 800;
+}
+
+.calendar-selected-description {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.calendar-day-details {
+  display: none !important;
+}
+
+.calendar-editor,
+.family-tree-editor {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--card-soft);
+  text-align: left;
+}
+
+/* Family tree */
+.family-tree-display {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.family-tree-root {
+  display: grid;
+  place-items: center;
+}
+
+.family-tree-main-person {
+  width: min(100%, 330px);
+  background: var(--success-soft);
+  border-color: #abefc6;
+}
+
+.family-tree-branches {
+  display: grid;
+  gap: 12px;
+}
+
+.family-tree-branch {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--card-soft);
+}
+
+.family-tree-person strong,
+.family-tree-person span,
+.family-tree-person p,
+.family-member-editor-info strong,
+.family-member-editor-info span {
+  display: block;
+}
+
+.family-tree-person span,
+.family-tree-person p,
+.family-member-editor-info span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.family-member-editor-info {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 9px;
+  align-items: center;
+}
+
+.family-member-editor-icon {
+  width: 46px;
+  height: 46px;
+}
+
+/* Timer */
+.timer-stage {
+  display: grid;
+  place-items: center;
+  margin: 16px 0;
+}
+
+.timer-ring {
+  width: 210px;
+  height: 210px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary) 0 100%, #f2f4f7 0 100%);
+}
+
+.timer-character {
+  font-size: 32px;
+}
+
+.timer-ring strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.timer-ring small,
+.timer-status {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.timer-status {
+  margin-bottom: 12px;
+}
+
+.timer-presets,
+.timer-actions {
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.timer-presets button.active {
+  background: #eff6ff;
+  color: var(--primary-dark);
+  border-color: var(--primary);
+}
+
+.timer-custom {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--card-soft);
+  text-align: left;
+}
+
+/* Pin pad */
+.pin-pad-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(16, 24, 40, 0.58);
+}
+
+.pin-pad-backdrop[hidden] {
+  display: none !important;
+}
+
+.pin-pad-modal {
+  width: min(100%, 370px);
+  padding: 18px;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 18px 44px rgba(16, 24, 40, 0.22);
+  text-align: center;
+}
+
+.pin-box-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  margin: 10px 0 14px;
+}
+
+.pin-box,
+.pin-extra {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card-soft);
+  font-weight: 900;
+}
+
+.pin-box {
+  width: 40px;
+  height: 46px;
+  font-size: 28px;
+}
+
+.pin-box.filled {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.pin-extra {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 6px;
+}
+
+.pin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.pin-keypad button {
+  padding: 14px 8px;
+  font-size: 20px;
+}
+
+.pin-keypad button[data-pin-action] {
+  font-size: 14px;
+}
+
+.pin-pad-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+@media (min-width: 520px) {
+  .feelings-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .family-calendar-grid,
+  .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .coin-controls {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .app {
+    padding-inline: 8px;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  .app-nav,
+  body.child-mode .app-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .coin-count {
+    font-size: 46px;
+  }
+
+  .light {
+    width: 72px;
+    height: 72px;
+  }
+
+  .reward-shop-item {
+    grid-template-columns: 48px 1fr;
+  }
+
+  .claim-reward-button {
+    grid-column: 1 / -1;
+  }
+
+  .bar-row {
+    grid-template-columns: 72px 1fr 34px;
+  }
+}
