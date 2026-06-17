@@ -1,11 +1,11 @@
-# Local-only setup for Child&Parent app
+# Local-only setup for Together Steps
 
-This test version does not use cloud sync.
+This test version does not use Firebase.
 
 Data is saved on the device/browser using local storage. That means:
 
-- No cloud project is needed.
-- No cloud database rules are needed.
+- No Firebase project is needed.
+- No Firestore rules are needed.
 - No parent account sign-in is needed.
 - Data will not sync between phones.
 - Clearing browser/app data can delete the saved test data.

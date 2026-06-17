@@ -88,8 +88,8 @@ button {
 }
 
 .app-icon-preview {
-  width: 82px;
-  height: 82px;
+  width: 94px;
+  height: 94px;
   display: block;
   margin: 10px 0;
   border: 1px solid var(--border-soft);
@@ -1272,4 +1272,55 @@ body.child-mode .claim-reward-button:not(:disabled)::after {
   .bar-row {
     grid-template-columns: 72px 1fr 34px;
   }
+}
+
+
+/* Together Steps profile photo upload */
+.profile-photo-card {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 8px 0 10px;
+}
+
+.profile-photo-preview,
+.profile-photo-placeholder {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 3px solid var(--border-soft);
+  box-shadow: 0 8px 20px rgba(16, 24, 40, 0.10);
+  background: var(--card-soft);
+  object-fit: cover;
+}
+
+.profile-photo-placeholder {
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  color: var(--muted);
+}
+
+.profile-photo-preview[hidden],
+.profile-photo-placeholder[hidden] {
+  display: none !important;
+}
+
+.profile-photo-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.profile-photo-settings-panel input[type="file"] {
+  padding: 12px;
+  background: var(--card-soft);
+}
+
+#removeProfilePhotoButton {
+  background: var(--danger-soft);
+  color: #b42318;
+  border-color: #fecdca;
 }

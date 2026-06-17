@@ -1,4 +1,4 @@
-App name: Child&Parent app
+App name: Together Steps
 Package name: com.childparent.app
 Theme: plain fixed theme
 Personal branding: none

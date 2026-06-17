@@ -1,6 +1,6 @@
 {
-  "name": "Child&Parent app",
-  "short_name": "Child&Parent",
+  "name": "Together Steps",
+  "short_name": "Together Steps",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f7f8fa",

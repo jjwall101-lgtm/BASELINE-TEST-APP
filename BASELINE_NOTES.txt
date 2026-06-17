@@ -1,4 +1,4 @@
-Child&Parent app - plain local coin test baseline
+Together Steps - plain local coin test baseline
 
 Built from the latest uploaded v51 baseline with Timer and Family tabs.
 This version removes cloud sync and uses local device/browser storage only.

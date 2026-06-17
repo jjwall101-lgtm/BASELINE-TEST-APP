@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Child&amp;Parent app</title>
+  <title>Together Steps</title>
 
   <link rel="stylesheet" href="style.css?v=plain-theme-baseline" />
   <link rel="manifest" href="manifest.json" />
@@ -27,9 +27,15 @@
           <button type="button" class="small-parent-button" id="headerUnlockButton">Parent Mode</button>
         </div>
 
-        <img class="app-icon-preview" src="icon.png" alt="Child&amp;Parent app logo" />
+        <img class="app-icon-preview" src="icon.png" alt="Together Steps logo" />
 
-        <h1>Child&amp;Parent app</h1>
+        <h1>Together Steps</h1>
+
+        <section class="profile-photo-card" aria-label="Profile photo">
+          <img id="profilePhotoPreview" class="profile-photo-preview" alt="Profile photo" hidden />
+          <div id="profilePhotoPlaceholder" class="profile-photo-placeholder" aria-hidden="true">👤</div>
+          <p>Profile photo</p>
+        </section>
 
         <p class="mode-status-pill" id="modeStatusPill">Child Mode</p>
 
@@ -506,6 +512,16 @@
         </div>
 
         <div class="settings-unlocked-content" id="settingsUnlockedContent" hidden>
+          <section class="parent-panel profile-photo-settings-panel">
+            <div class="panel-title">Profile Photo</div>
+            <p class="small-copy">Choose a profile photo for this device. It is saved locally and can be changed or removed at any time.</p>
+
+            <label for="profilePhotoInput">Upload profile photo</label>
+            <input type="file" id="profilePhotoInput" accept="image/*" />
+
+            <button type="button" id="removeProfilePhotoButton">Remove Profile Photo</button>
+          </section>
+
           <section class="parent-panel">
             <div class="panel-title">Coin Settings</div>
 

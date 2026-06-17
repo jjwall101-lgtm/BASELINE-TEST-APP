@@ -1,10 +1,10 @@
-# Child&Parent app - plain local test baseline
+# Together Steps - plain local test baseline
 
 This is the plain-theme local-only test version.
 
 ## App identity
 
-- App name: Child&Parent app
+- App name: Together Steps
 - Android package name: com.childparent.app
 - Theme: plain fixed theme
 - Storage: local device/browser storage only
@@ -25,8 +25,8 @@ This is the plain-theme local-only test version.
 
 ## Not included in this test version
 
-- Cloud sync
-- Cloud database rules
+- Firebase sync
+- Firestore rules
 - Parent account sign-in
 - Cross-device syncing
 
@@ -54,3 +54,7 @@ Upload these files together:
 ## Baseline note
 
 This version keeps the v51 Timer and Family tab functionality, uses a plain neutral interface, and saves test data locally on the device.
+
+## Profile photo
+
+This version lets the user upload a profile photo in Settings. The photo is cropped square, saved locally on the device, and can be removed at any time.

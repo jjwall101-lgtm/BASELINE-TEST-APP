@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const DATA_KEY = "childParentAppDataV1";
-  const PIN_KEY = "childParentPinV1";
-  const THEME_KEY = "childParentSelectedTheme";
-  const NOTE_AUTHOR_KEY = "childParentNoteAuthorV1";
-  const LAST_NOTIFICATION_KEY = "childParentLastNotificationV1";
-  const CHILD_MODE_KEY = "childParentChildModeV1";
-  const TIMER_STATE_KEY = "childParentVisualTimerV1";
+  const DATA_KEY = "togetherStepsDataV1";
+  const PIN_KEY = "togetherStepsParentPinV1";
+  const THEME_KEY = "togetherStepsSelectedTheme";
+  const NOTE_AUTHOR_KEY = "togetherStepsParentNoteAuthorV1";
+  const LAST_NOTIFICATION_KEY = "togetherStepsLastNotificationV1";
+  const CHILD_MODE_KEY = "togetherStepsChildModeV1";
+  const TIMER_STATE_KEY = "togetherStepsVisualTimerV1";
+  const PROFILE_PHOTO_KEY = "togetherStepsProfilePhotoV1";
   const DEFAULT_PIN = "1234";
 
   const DEFAULT_CATEGORIES = [
@@ -69,6 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
     syncStatus: $("syncStatus"),
     headerUnlockButton: $("headerUnlockButton"),
     modeStatusPill: $("modeStatusPill"),
+    profilePhotoPreview: $("profilePhotoPreview"),
+    profilePhotoPlaceholder: $("profilePhotoPlaceholder"),
+    profilePhotoInput: $("profilePhotoInput"),
+    removeProfilePhotoButton: $("removeProfilePhotoButton"),
     pinPadBackdrop: $("pinPadBackdrop"),
     pinPadText: $("pinPadText"),
     pinBoxRow: $("pinBoxRow"),
@@ -2579,6 +2584,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCelebration();
     updateParentLockDisplay();
     updateNotificationStatus();
+    updateProfilePhotoDisplay();
     maybeSendLatestNotification(currentData).catch(console.error);
   }
 
@@ -3093,6 +3099,87 @@ document.addEventListener("DOMContentLoaded", () => {
       .replaceAll(">", "&gt;");
   }
 
+
+  function getStoredProfilePhoto() {
+    return localStorage.getItem(PROFILE_PHOTO_KEY) || "";
+  }
+
+  function updateProfilePhotoDisplay() {
+    const photo = getStoredProfilePhoto();
+
+    if (elements.profilePhotoPreview) {
+      if (photo) {
+        elements.profilePhotoPreview.src = photo;
+        elements.profilePhotoPreview.hidden = false;
+      } else {
+        elements.profilePhotoPreview.removeAttribute("src");
+        elements.profilePhotoPreview.hidden = true;
+      }
+    }
+
+    if (elements.profilePhotoPlaceholder) {
+      elements.profilePhotoPlaceholder.hidden = Boolean(photo);
+    }
+  }
+
+  function resizeImageToDataUrl(file, maxSize = 512) {
+    return new Promise((resolve, reject) => {
+      if (!file || !file.type || !file.type.startsWith("image/")) {
+        reject(new Error("Choose an image file."));
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onerror = () => reject(new Error("Could not read that image."));
+      reader.onload = () => {
+        const image = new Image();
+        image.onerror = () => reject(new Error("Could not load that image."));
+        image.onload = () => {
+          const sourceSize = Math.min(image.naturalWidth || image.width, image.naturalHeight || image.height);
+          const sourceX = Math.max(0, ((image.naturalWidth || image.width) - sourceSize) / 2);
+          const sourceY = Math.max(0, ((image.naturalHeight || image.height) - sourceSize) / 2);
+          const canvas = document.createElement("canvas");
+          canvas.width = maxSize;
+          canvas.height = maxSize;
+          const context = canvas.getContext("2d");
+          context.fillStyle = "#ffffff";
+          context.fillRect(0, 0, maxSize, maxSize);
+          context.drawImage(image, sourceX, sourceY, sourceSize, sourceSize, 0, 0, maxSize, maxSize);
+          resolve(canvas.toDataURL("image/jpeg", 0.86));
+        };
+        image.src = reader.result;
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function saveProfilePhotoFromInput(event) {
+    const file = event?.target?.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      const dataUrl = await resizeImageToDataUrl(file);
+      localStorage.setItem(PROFILE_PHOTO_KEY, dataUrl);
+      updateProfilePhotoDisplay();
+    } catch (error) {
+      alert(error.message || "Could not save that photo.");
+    } finally {
+      if (elements.profilePhotoInput) {
+        elements.profilePhotoInput.value = "";
+      }
+    }
+  }
+
+  function removeProfilePhoto() {
+    localStorage.removeItem(PROFILE_PHOTO_KEY);
+    updateProfilePhotoDisplay();
+  }
+
   function notificationSupported() {
     return "Notification" in window && "serviceWorker" in navigator;
   }
@@ -3152,7 +3239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateNotificationStatus();
 
     if (permission === "granted") {
-      await showPhoneNotification("Child&Parent app notifications enabled", {
+      await showPhoneNotification("Together Steps notifications enabled", {
         body: "You will be notified when coins, rewards, and important logs change.",
         tag: "notifications-enabled"
       });
@@ -3279,6 +3366,14 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.enableNotificationsButton.addEventListener("click", enableNotifications);
     elements.settingsEnableNotificationsButton.addEventListener("click", enableNotifications);
 
+    if (elements.profilePhotoInput) {
+      elements.profilePhotoInput.addEventListener("change", saveProfilePhotoFromInput);
+    }
+
+    if (elements.removeProfilePhotoButton) {
+      elements.removeProfilePhotoButton.addEventListener("click", removeProfilePhoto);
+    }
+
     elements.saveQuickLogButton.addEventListener("click", saveQuickDailyLog);
 
     elements.addParentNoteButton.addEventListener("click", addOrUpdateNote);
@@ -3344,5 +3439,6 @@ document.addEventListener("DOMContentLoaded", () => {
     startTimerTick();
   }
   updateDisplay();
+  updateProfilePhotoDisplay();
   initLocalOnlyMode();
 });

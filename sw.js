@@ -1,4 +1,4 @@
-const CACHE_NAME = "child-parent-app-plain-local-v53";
+const CACHE_NAME = "together-steps-local-v1";
 
 self.addEventListener("install", event => {
   self.skipWaiting();
