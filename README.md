@@ -58,3 +58,8 @@ This version keeps the v51 Timer and Family tab functionality, uses a plain neut
 ## Profile photo
 
 This version lets the user upload a profile photo in Settings. The photo is cropped square, saved locally on the device, and can be removed at any time.
+
+
+## Theme pack
+
+This local-only test version includes Plain, Retro / Mario-style, Space, Minecraft-style, and Bunny themes. Change the theme from Settings after unlocking Parent Mode. Theme choice is saved locally on the device.

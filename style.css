@@ -1324,3 +1324,313 @@ body.child-mode .claim-reward-button:not(:disabled)::after {
   color: #b42318;
   border-color: #fecdca;
 }
+
+
+/* THEME PACK: Plain + Retro/Mario-style + Space + Minecraft-style + Bunny */
+:root,
+html[data-theme="plain"] {
+  --theme-accent: var(--primary);
+}
+
+html[data-theme="mario"] {
+  --bg: linear-gradient(180deg, #79d8ff 0%, #bdf2ff 44%, #69d45d 45%, #47aa45 100%);
+  --card: #fff8d6;
+  --card-soft: #fffbe8;
+  --text: #25160b;
+  --muted: #7b4a2a;
+  --border: #6b3f1f;
+  --border-soft: rgba(107, 63, 31, 0.28);
+  --primary: #f97316;
+  --primary-dark: #c2410c;
+  --success: #36d45a;
+  --success-soft: #dcffd7;
+  --warning: #ffd447;
+  --warning-soft: #fff7c2;
+  --danger: #ff3d3d;
+  --danger-soft: #ffe0df;
+  --shadow: 0 10px 0 rgba(31, 31, 31, 0.16), 0 18px 28px rgba(31, 31, 31, 0.14);
+  --theme-accent: #ffd447;
+}
+
+html[data-theme="space"] {
+  --bg:
+    radial-gradient(circle at 18% 14%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 18%, rgba(255,255,255,.75) 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 62%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+    linear-gradient(180deg, #0e1244 0%, #090b2f 58%, #171d68 100%);
+  --card: #111b5c;
+  --card-soft: #18236e;
+  --text: #ffffff;
+  --muted: #cfd6ff;
+  --border: #6f7ee8;
+  --border-soft: rgba(255, 255, 255, 0.16);
+  --primary: #45d8ff;
+  --primary-dark: #22b8e6;
+  --success: #5fffd4;
+  --success-soft: rgba(95, 255, 212, 0.14);
+  --warning: #ffe66d;
+  --warning-soft: rgba(255, 230, 109, 0.16);
+  --danger: #ff8ea1;
+  --danger-soft: rgba(255, 142, 161, 0.14);
+  --shadow: 0 10px 26px rgba(0,0,0,0.34);
+  --theme-accent: #45d8ff;
+}
+
+html[data-theme="minecraft"] {
+  --bg: linear-gradient(180deg, #7ccfff 0 32%, #7bdd62 33% 62%, #8b5b38 63% 100%);
+  --card: #f1e2b7;
+  --card-soft: #fff5d7;
+  --text: #1f1f1f;
+  --muted: #5b4636;
+  --border: #2f2118;
+  --border-soft: rgba(47, 33, 24, 0.22);
+  --primary: #5cae40;
+  --primary-dark: #3f7f32;
+  --success: #4ade80;
+  --success-soft: #dcfce7;
+  --warning: #facc15;
+  --warning-soft: #fef9c3;
+  --danger: #ef4444;
+  --danger-soft: #fee2e2;
+  --shadow: 6px 6px 0 rgba(31,31,31,0.26), 0 12px 24px rgba(31,31,31,0.14);
+  --theme-accent: #5cae40;
+}
+
+html[data-theme="bunny"] {
+  --bg:
+    radial-gradient(circle at 16% 12%, rgba(255,255,255,.9) 0 30px, transparent 31px),
+    radial-gradient(circle at 86% 20%, rgba(255,255,255,.72) 0 24px, transparent 25px),
+    linear-gradient(180deg, #fff1f8 0%, #ffe4f1 52%, #d9f99d 53%, #bbf7d0 100%);
+  --card: #ffffff;
+  --card-soft: #fff7fb;
+  --text: #3b1731;
+  --muted: #7a486b;
+  --border: #f9a8d4;
+  --border-soft: rgba(249, 168, 212, 0.46);
+  --primary: #ec4899;
+  --primary-dark: #be185d;
+  --success: #22c55e;
+  --success-soft: #ecfdf3;
+  --warning: #f59e0b;
+  --warning-soft: #fff7ed;
+  --danger: #f43f5e;
+  --danger-soft: #fff1f2;
+  --shadow: 0 12px 26px rgba(236,72,153,0.13);
+  --theme-accent: #f9a8d4;
+}
+
+.theme-settings-panel select {
+  margin-top: 4px;
+}
+
+html[data-theme="mario"] .hero,
+html[data-theme="minecraft"] .hero,
+html[data-theme="bunny"] .hero {
+  overflow: hidden;
+  position: relative;
+}
+
+html[data-theme="mario"] .hero::before,
+html[data-theme="space"] .hero::before,
+html[data-theme="minecraft"] .hero::before,
+html[data-theme="bunny"] .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+html[data-theme="mario"] .hero::before {
+  background:
+    radial-gradient(circle at 16% 22%, #ffd447 0 12px, transparent 13px),
+    linear-gradient(90deg, transparent 0 58%, rgba(249, 115, 22, .16) 58% 66%, transparent 66%);
+}
+
+html[data-theme="space"] .hero::before {
+  background:
+    radial-gradient(circle at 12% 22%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 34%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+    radial-gradient(circle at 50% 80%, rgba(69,216,255,.35) 0 58px, transparent 59px);
+}
+
+html[data-theme="minecraft"] .hero::before {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.18) 0 25%, transparent 26% 50%, rgba(255,255,255,.18) 51% 75%, transparent 76%),
+    linear-gradient(180deg, transparent 0 68%, rgba(92,174,64,.22) 69% 100%);
+  background-size: 46px 46px, auto;
+}
+
+html[data-theme="bunny"] .hero::before {
+  background:
+    radial-gradient(ellipse at 18% 25%, rgba(255,255,255,.8) 0 18px, transparent 19px),
+    radial-gradient(ellipse at 86% 30%, rgba(255,255,255,.65) 0 18px, transparent 19px),
+    radial-gradient(circle at 78% 82%, rgba(245,158,11,.28) 0 20px, transparent 21px);
+}
+
+html[data-theme="mario"] .plain-header-line,
+html[data-theme="space"] .plain-header-line,
+html[data-theme="minecraft"] .plain-header-line,
+html[data-theme="bunny"] .plain-header-line {
+  width: 110px;
+  height: 8px;
+}
+
+html[data-theme="mario"] .plain-header-line {
+  background: repeating-linear-gradient(90deg, #f97316 0 20px, #ffd447 20px 40px, #36d45a 40px 60px);
+}
+
+html[data-theme="space"] .plain-header-line {
+  background: linear-gradient(90deg, #45d8ff, #a78bfa, #f0abfc);
+}
+
+html[data-theme="minecraft"] .plain-header-line {
+  background: repeating-linear-gradient(90deg, #5cae40 0 18px, #7b4a2a 18px 36px);
+  border-radius: 2px;
+}
+
+html[data-theme="bunny"] .plain-header-line {
+  background: linear-gradient(90deg, #f9a8d4, #fb7185, #f59e0b);
+}
+
+html[data-theme="mario"] .app-icon-preview,
+html[data-theme="minecraft"] .app-icon-preview,
+html[data-theme="bunny"] .app-icon-preview,
+html[data-theme="space"] .app-icon-preview {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme="mario"] .section-title,
+html[data-theme="mario"] .panel-title,
+html[data-theme="mario"] .mode-status-pill,
+html[data-theme="mario"] .child-welcome,
+html[data-theme="mario"] .small-parent-button,
+html[data-theme="mario"] .nav-button.active {
+  background: #ffd447;
+  color: #5b3100;
+}
+
+html[data-theme="space"] .section-title,
+html[data-theme="space"] .panel-title,
+html[data-theme="space"] .mode-status-pill,
+html[data-theme="space"] .child-welcome,
+html[data-theme="space"] .small-parent-button,
+html[data-theme="space"] .nav-button.active {
+  background: #45d8ff;
+  color: #020316;
+}
+
+html[data-theme="minecraft"] .section-title,
+html[data-theme="minecraft"] .panel-title,
+html[data-theme="minecraft"] .mode-status-pill,
+html[data-theme="minecraft"] .child-welcome,
+html[data-theme="minecraft"] .small-parent-button,
+html[data-theme="minecraft"] .nav-button.active {
+  background: #5cae40;
+  color: #ffffff;
+}
+
+html[data-theme="bunny"] .section-title,
+html[data-theme="bunny"] .panel-title,
+html[data-theme="bunny"] .mode-status-pill,
+html[data-theme="bunny"] .child-welcome,
+html[data-theme="bunny"] .small-parent-button,
+html[data-theme="bunny"] .nav-button.active {
+  background: #f9a8d4;
+  color: #6b123d;
+}
+
+html[data-theme="space"] input,
+html[data-theme="space"] select,
+html[data-theme="space"] textarea,
+html[data-theme="space"] .nav-button,
+html[data-theme="space"] .pin-keypad button,
+html[data-theme="space"] .pin-pad-actions button {
+  background: #18236e;
+  color: #ffffff;
+  border-color: rgba(255,255,255,0.22);
+}
+
+html[data-theme="mario"] .journey-character::after,
+html[data-theme="space"] .journey-character::after,
+html[data-theme="minecraft"] .journey-character::after,
+html[data-theme="bunny"] .journey-character::after {
+  content: "";
+}
+
+html[data-theme="mario"] .hero-child-coins::before,
+html[data-theme="bunny"] .hero-child-coins::before,
+html[data-theme="space"] .hero-child-coins::before,
+html[data-theme="minecraft"] .hero-child-coins::before {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+html[data-theme="mario"] .hero-child-coins small::before { content: "🌟 "; }
+html[data-theme="space"] .hero-child-coins small::before { content: "🪐 "; }
+html[data-theme="minecraft"] .hero-child-coins small::before { content: "💎 "; }
+html[data-theme="bunny"] .hero-child-coins small::before { content: "🥕 "; }
+
+html[data-theme="space"] .timer-ring,
+html[data-theme="space"] .prize-drop,
+html[data-theme="space"] .family-today-card,
+html[data-theme="space"] .calendar-day,
+html[data-theme="space"] .reward-shop-item,
+html[data-theme="space"] .parent-note-item,
+html[data-theme="space"] .history-item,
+html[data-theme="space"] .family-tree-person {
+  background: #18236e;
+  color: #ffffff;
+}
+
+html[data-theme="minecraft"] .calendar-day,
+html[data-theme="minecraft"] .reward-shop-item,
+html[data-theme="minecraft"] .family-tree-person {
+  border-radius: 10px;
+}
+
+html[data-theme="bunny"] .profile-photo-placeholder,
+html[data-theme="bunny"] .timer-character {
+  color: #ec4899;
+}
+
+html[data-theme="bunny"] .hero::after {
+  content: "🐰";
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  font-size: 28px;
+  opacity: .58;
+  pointer-events: none;
+}
+
+html[data-theme="mario"] .hero::after {
+  content: "🌟";
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  font-size: 26px;
+  opacity: .68;
+  pointer-events: none;
+}
+
+html[data-theme="space"] .hero::after {
+  content: "🚀";
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  font-size: 28px;
+  opacity: .72;
+  pointer-events: none;
+}
+
+html[data-theme="minecraft"] .hero::after {
+  content: "⛏️";
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  font-size: 28px;
+  opacity: .72;
+  pointer-events: none;
+}

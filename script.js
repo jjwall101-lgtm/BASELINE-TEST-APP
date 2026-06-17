@@ -611,16 +611,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return false;
   }
 
+  const THEME_OPTIONS = ["plain", "mario", "space", "minecraft", "bunny"];
+
   function getCurrentTheme() {
-    return "plain";
+    const savedTheme = localStorage.getItem(THEME_KEY) || "plain";
+    return THEME_OPTIONS.includes(savedTheme) ? savedTheme : "plain";
   }
 
-  function setTheme() {
-    document.documentElement.dataset.theme = "plain";
-    localStorage.setItem(THEME_KEY, "plain");
+  function setTheme(theme = getCurrentTheme()) {
+    const safeTheme = THEME_OPTIONS.includes(theme) ? theme : "plain";
+    document.documentElement.dataset.theme = safeTheme;
+    localStorage.setItem(THEME_KEY, safeTheme);
+
     if (elements.themeSelect) {
-      elements.themeSelect.value = "plain";
+      elements.themeSelect.value = safeTheme;
     }
+
+    updateThemeText();
     updateProgressCharacter();
     updatePrizeDetails();
     updateTimerDisplay();
@@ -687,12 +694,24 @@ document.addEventListener("DOMContentLoaded", () => {
     data.history = data.history.slice(0, 500);
   }
 
-  function getPrizeDetails() {
-    return {
-      icon: "🏆",
-      name: "GOAL REACHED",
-      subtitle: "Goal reached!"
-    };
+  function getPrizeDetails(theme = getCurrentTheme()) {
+    if (theme === "space") {
+      return { icon: "🪐", name: "SPACE TROPHY", subtitle: "Mission complete!" };
+    }
+
+    if (theme === "minecraft") {
+      return { icon: "💎", name: "DIAMOND PRIZE", subtitle: "Build complete!" };
+    }
+
+    if (theme === "bunny") {
+      return { icon: "🥕", name: "BUNNY BONUS", subtitle: "Hoppy goal reached!" };
+    }
+
+    if (theme === "mario") {
+      return { icon: "🌟", name: "SUPER STAR PRIZE", subtitle: "Goal reached!" };
+    }
+
+    return { icon: "🏆", name: "GOAL REACHED", subtitle: "Goal reached!" };
   }
 
   function startCelebrationIfNeeded(data) {
@@ -2268,6 +2287,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getTimerCharacter() {
+    const theme = getCurrentTheme();
+    if (theme === "space") return "🚀";
+    if (theme === "minecraft") return "⛏️";
+    if (theme === "bunny") return "🐰";
+    if (theme === "mario") return "🍄";
     return "⏱️";
   }
 
@@ -2590,7 +2614,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateThemeText() {
     updateProgressCharacter();
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#2563eb");
+    const themeColours = {
+      plain: "#2563eb",
+      mario: "#f97316",
+      space: "#10103e",
+      minecraft: "#3f7f32",
+      bunny: "#ec4899"
+    };
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themeColours[getCurrentTheme()] || themeColours.plain);
   }
 
   function updateProgressCharacter() {
@@ -2598,7 +2629,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    elements.progressCharacter.textContent = "●";
+    const theme = getCurrentTheme();
+    elements.progressCharacter.textContent = theme === "space" ? "🚀" : theme === "minecraft" ? "⛏️" : theme === "bunny" ? "🐰" : theme === "mario" ? "🍄" : "●";
   }
 
   function updateCoinDisplay() {
@@ -3343,7 +3375,7 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.settingsUnlockButton.addEventListener("click", async () => { await verifyParentPin("unlock settings"); });
 
     if (elements.themeSelect) {
-      elements.themeSelect.addEventListener("change", () => setTheme());
+      elements.themeSelect.addEventListener("change", event => setTheme(event.target.value));
     }
 
     elements.deduct5Button.addEventListener("click", () => adjustCoins(-5));

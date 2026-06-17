@@ -4,3 +4,6 @@ Built from the latest uploaded v51 baseline with Timer and Family tabs.
 This version removes cloud sync and uses local device/browser storage only.
 The test reward system uses coins.
 No personal child image, personal names, or creator branding are included.
+
+
+Theme pack added: Plain, Retro / Mario-style, Space, Minecraft-style, and Bunny. Firebase is still removed; saving remains local-only.

@@ -6,7 +6,7 @@
 
   <title>Together Steps</title>
 
-  <link rel="stylesheet" href="style.css?v=plain-theme-baseline" />
+  <link rel="stylesheet" href="style.css?v=themes-v1" />
   <link rel="manifest" href="manifest.json" />
 
   <link rel="icon" href="icon.png" />
@@ -522,6 +522,20 @@
             <button type="button" id="removeProfilePhotoButton">Remove Profile Photo</button>
           </section>
 
+          <section class="parent-panel theme-settings-panel">
+            <div class="panel-title">App Theme</div>
+            <p class="small-copy">Choose the test theme for this device. Theme choice is saved locally.</p>
+
+            <label for="themeSelect">Theme</label>
+            <select id="themeSelect">
+              <option value="plain">Plain</option>
+              <option value="mario">Retro / Mario-style</option>
+              <option value="space">Space</option>
+              <option value="minecraft">Minecraft-style</option>
+              <option value="bunny">Bunny</option>
+            </select>
+          </section>
+
           <section class="parent-panel">
             <div class="panel-title">Coin Settings</div>
 
@@ -602,6 +616,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=plain-theme-baseline" type="module"></script>
+  <script src="script.js?v=themes-v1" type="module"></script>
 </body>
 </html>
