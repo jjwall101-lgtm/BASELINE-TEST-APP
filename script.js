@@ -3184,7 +3184,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-4");
+      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-5");
       await navigator.serviceWorker.ready;
       return serviceWorkerRegistration;
     } catch (error) {

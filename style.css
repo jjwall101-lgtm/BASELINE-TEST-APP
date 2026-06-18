@@ -3758,3 +3758,537 @@ html[data-theme="flower"] .hero-child-coins {
 html[data-theme="flower"] .hero-child-streak {
   background: linear-gradient(180deg, #dcfce7, #86efac);
 }
+
+
+/* GRAPHICS + ANIMATION POLISH V5 */
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,255,255,0.22) 0 40px, transparent 41px),
+    radial-gradient(circle at 88% 18%, rgba(255,255,255,0.14) 0 34px, transparent 35px),
+    radial-gradient(circle at 76% 80%, rgba(255,255,255,0.10) 0 44px, transparent 45px);
+  animation: skySparkle 16s linear infinite;
+}
+
+.hero-bg {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.hero-bg-one {
+  width: 120px;
+  height: 120px;
+  top: -18px;
+  left: -20px;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.15) 62%, transparent 70%);
+  animation: floatBlobOne 7s ease-in-out infinite;
+}
+
+.hero-bg-two {
+  width: 140px;
+  height: 140px;
+  right: -28px;
+  top: 24px;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.12) 62%, transparent 72%);
+  animation: floatBlobTwo 8.5s ease-in-out infinite;
+}
+
+.hero,
+.coin-card,
+.behaviour-card,
+.treat-card,
+.rewards-shop-card,
+.parent-page-card,
+.history-card,
+.reports-card,
+.settings-card,
+.chart-card,
+.child-dashboard-card,
+.calendar-card,
+.feelings-card,
+.family-tree-card,
+.timer-card,
+.parent-panel,
+.profile-photo-card,
+.section-title,
+.panel-title,
+.child-welcome,
+.mode-status-pill,
+.family-branch-title {
+  position: relative;
+  transform: translateZ(0);
+}
+
+.hero,
+.coin-card,
+.behaviour-card,
+.treat-card,
+.rewards-shop-card,
+.parent-page-card,
+.history-card,
+.reports-card,
+.settings-card,
+.chart-card,
+.child-dashboard-card,
+.calendar-card,
+.feelings-card,
+.family-tree-card,
+.timer-card,
+.parent-panel {
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.02));
+  box-shadow: 8px 8px 0 var(--outline), 0 16px 28px rgba(0,0,0,0.12);
+}
+
+.hero::before,
+.coin-card::before,
+.behaviour-card::before,
+.treat-card::before,
+.rewards-shop-card::before,
+.parent-page-card::before,
+.history-card::before,
+.reports-card::before,
+.settings-card::before,
+.child-dashboard-card::before,
+.calendar-card::before,
+.feelings-card::before,
+.family-tree-card::before,
+.timer-card::before,
+.parent-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,0.20), transparent 45%);
+}
+
+.page.active {
+  animation: pagePopIn 0.34s ease-out;
+}
+
+.section-title,
+.panel-title,
+.child-welcome,
+.mode-status-pill,
+.family-branch-title {
+  box-shadow: 4px 4px 0 var(--outline), 0 8px 16px rgba(0,0,0,0.10);
+}
+
+.section-title::after,
+.panel-title::after,
+.child-welcome::after,
+.mode-status-pill::after,
+.family-branch-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: skewX(-18deg);
+  animation: labelShine 3.8s ease-in-out infinite;
+}
+
+.app-nav {
+  box-shadow: 5px 5px 0 var(--outline), 0 14px 24px rgba(0,0,0,0.14);
+}
+
+.nav-button,
+.coin-controls button,
+.notification-controls button,
+.reset-button,
+.collect-prize-button,
+.level-card,
+.locked-panel button,
+.note-form button,
+.reward-form button,
+.category-form button,
+.history-header button,
+.reports-card button,
+.settings-card button,
+.reward-editor-buttons button,
+.claim-reward-button,
+.delete-note-button,
+.edit-note-button,
+.reward-request-actions button,
+#saveQuickLogButton,
+.calendar-editor-buttons button,
+.family-tree-editor button,
+.family-member-editor-actions button {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 3px 3px 0 var(--outline), 0 8px 16px rgba(0,0,0,0.10);
+}
+
+.nav-button::before,
+.coin-controls button::before,
+.notification-controls button::before,
+.reset-button::before,
+.collect-prize-button::before,
+.level-card::before,
+.locked-panel button::before,
+.note-form button::before,
+.reward-form button::before,
+.category-form button::before,
+.history-header button::before,
+.reports-card button::before,
+.settings-card button::before,
+.reward-editor-buttons button::before,
+.claim-reward-button::before,
+.delete-note-button::before,
+.edit-note-button::before,
+.reward-request-actions button::before,
+#saveQuickLogButton::before,
+.calendar-editor-buttons button::before,
+.family-tree-editor button::before,
+.family-member-editor-actions button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.22), transparent 55%);
+  pointer-events: none;
+}
+
+.nav-button.active {
+  animation: activeButtonPulse 2s ease-in-out infinite;
+}
+
+.hero-child-stat,
+.reward-shop-icon,
+.family-person-icon,
+.parent-feeling-icon,
+.calendar-detail-icon,
+.family-today-icon,
+.reward-shop-item,
+.family-calendar-day,
+.calendar-day,
+.feeling-face,
+.report-stat,
+.child-status-row div,
+.dashboard-stat,
+.reward-request-item,
+.parent-note-item,
+.history-item,
+.reward-editor-item,
+.category-item,
+.family-member-editor-item,
+.profile-photo-card {
+  box-shadow: 4px 4px 0 var(--outline), 0 10px 18px rgba(0,0,0,0.10);
+}
+
+.hero-child-stat {
+  animation: statFloat 3.2s ease-in-out infinite;
+}
+
+.hero-child-stat:nth-child(2) {
+  animation-delay: .35s;
+}
+
+.profile-photo-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-photo-card::after {
+  content: "";
+  position: absolute;
+  top: -25%;
+  left: -45%;
+  width: 55%;
+  height: 160%;
+  transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.38), transparent);
+  animation: photoShine 5.2s ease-in-out infinite;
+}
+
+.profile-photo-preview {
+  animation: gentleBob 4s ease-in-out infinite;
+}
+
+.coin-count,
+.streak-main span:first-child,
+.child-big-coins span,
+.hero-child-stat span {
+  text-shadow: 0 4px 0 rgba(255,255,255,0.55), 0 10px 14px rgba(0,0,0,0.12);
+}
+
+.progress-outer,
+.journey-track,
+.traffic-light,
+.pin-pad-modal,
+.pin-box,
+.reward-shop-icon,
+.family-person-icon,
+.parent-feeling-icon,
+.calendar-detail-icon,
+.family-today-icon {
+  box-shadow: 4px 4px 0 var(--outline), 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.progress-inner {
+  background-size: 200% 100% !important;
+  animation: progressGlow 3s linear infinite;
+}
+
+.journey-character {
+  animation: journeyBounce 1.9s ease-in-out infinite;
+}
+
+.feeling-face,
+.reward-shop-item,
+.family-calendar-day,
+.calendar-day,
+.parent-note-item,
+.history-item,
+.reward-editor-item,
+.category-item,
+.reward-request-item,
+.family-member-editor-item,
+.parent-feeling-item,
+.family-tree-person {
+  transition: transform .16s ease, box-shadow .16s ease, filter .18s ease;
+}
+
+.feeling-face:hover,
+.reward-shop-item:hover,
+.family-calendar-day:hover,
+.calendar-day:hover,
+.parent-note-item:hover,
+.history-item:hover,
+.reward-editor-item:hover,
+.category-item:hover,
+.reward-request-item:hover,
+.family-member-editor-item:hover,
+.parent-feeling-item:hover,
+.family-tree-person:hover {
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.02);
+}
+
+.feeling-face:active,
+.reward-shop-item:active,
+.family-calendar-day:active,
+.calendar-day:active {
+  transform: translateY(3px) scale(.98);
+}
+
+.feeling-emoji,
+.reward-shop-icon,
+.family-person-icon,
+.parent-feeling-icon,
+.calendar-person-icon,
+.calendar-detail-icon,
+.family-today-icon {
+  animation: iconBob 3.2s ease-in-out infinite;
+}
+
+.feelings-grid .feeling-face:nth-child(2n) .feeling-emoji,
+.rewards-list .reward-shop-item:nth-child(2n) .reward-shop-icon,
+.parent-feelings-list .parent-feeling-item:nth-child(2n) .parent-feeling-icon {
+  animation-delay: .35s;
+}
+
+.traffic-light {
+  background: linear-gradient(180deg, #2e2e2e, #0d0d0d);
+}
+
+.light.active {
+  animation: lightPulse 1.8s ease-in-out infinite;
+}
+
+.app-nav,
+.hero,
+.ground {
+  animation: softEntrance .45s ease-out;
+}
+
+.ground {
+  box-shadow: 5px 5px 0 var(--outline), 0 12px 18px rgba(0,0,0,0.12);
+}
+
+.grass,
+.dirt,
+.moon-top,
+.moon-base,
+.mc-grass,
+.mc-dirt,
+.bunny-ground-top,
+.bunny-ground-base,
+.princess-ground-top,
+.princess-ground-base,
+.football-ground-top,
+.football-ground-base,
+.car-ground-top,
+.car-ground-base,
+.blue-ground-top,
+.blue-ground-base,
+.flower-ground-top,
+.flower-ground-base {
+  background-size: 200% 100%;
+  animation: groundSlide 10s linear infinite;
+}
+
+.power-row > * {
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,0.14));
+}
+
+.theme-emoji-art,
+.heart-art,
+.carrot-art,
+.bunny-art,
+.rocket-art,
+.mushroom-art,
+.astronaut-helmet,
+.minecraft-character,
+.minecraft-block,
+.question-block,
+.coin-art,
+.brick-block {
+  animation-duration: 2.8s !important;
+}
+
+.child-safe-message,
+.latest-feeling-child,
+.child-next-reward,
+.next-reward,
+.family-today-card,
+.calendar-day-details,
+.calendar-editor,
+.family-tree-editor,
+.timer-display,
+.timer-progress-card {
+  box-shadow: 4px 4px 0 var(--outline), 0 10px 18px rgba(0,0,0,0.10);
+}
+
+html[data-theme="space"] body::before {
+  opacity: .55;
+}
+
+html[data-theme="space"] .hero-bg-one,
+html[data-theme="space"] .hero-bg-two {
+  background: radial-gradient(circle, rgba(69,216,255,.85) 0%, rgba(69,216,255,.18) 56%, transparent 72%);
+}
+
+html[data-theme="minecraft"] .hero-bg-one,
+html[data-theme="minecraft"] .hero-bg-two {
+  border-radius: 18px;
+  filter: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0));
+}
+
+html[data-theme="bunny"] .hero-bg-one,
+html[data-theme="princess"] .hero-bg-one,
+html[data-theme="flower"] .hero-bg-one {
+  background: radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,.25) 58%, transparent 74%);
+}
+
+html[data-theme="football"] .hero-bg-one,
+html[data-theme="football"] .hero-bg-two {
+  background: radial-gradient(circle, rgba(255,255,255,.65) 0%, rgba(255,255,255,.12) 56%, transparent 72%);
+}
+
+html[data-theme="car"] .hero-bg-one,
+html[data-theme="car"] .hero-bg-two,
+html[data-theme="blue"] .hero-bg-one,
+html[data-theme="blue"] .hero-bg-two,
+html[data-theme="plain"] .hero-bg-one,
+html[data-theme="plain"] .hero-bg-two {
+  background: radial-gradient(circle, rgba(255,255,255,.88) 0%, rgba(255,255,255,.18) 56%, transparent 72%);
+}
+
+@keyframes softEntrance {
+  from { opacity: .65; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pagePopIn {
+  from { opacity: 0; transform: translateY(14px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes labelShine {
+  0%, 75%, 100% { left: -35%; }
+  25% { left: 110%; }
+}
+
+@keyframes activeButtonPulse {
+  0%, 100% { transform: translateY(2px) scale(1); }
+  50% { transform: translateY(0) scale(1.03); }
+}
+
+@keyframes statFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes gentleBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes photoShine {
+  0%, 70%, 100% { left: -55%; }
+  30% { left: 120%; }
+}
+
+@keyframes journeyBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.03); }
+}
+
+@keyframes iconBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes lightPulse {
+  0%, 100% { box-shadow: 0 0 24px currentColor, inset 8px 8px 0 rgba(255,255,255,.28); }
+  50% { box-shadow: 0 0 34px currentColor, inset 8px 8px 0 rgba(255,255,255,.38); }
+}
+
+@keyframes progressGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes groundSlide {
+  0% { background-position: 0 0; }
+  100% { background-position: 120px 0; }
+}
+
+@keyframes floatBlobOne {
+  0%,100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(8px) translateX(10px) scale(1.06); }
+}
+
+@keyframes floatBlobTwo {
+  0%,100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-10px) translateX(-8px) scale(1.08); }
+}
+
+@keyframes skySparkle {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-5px); opacity: .95; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
