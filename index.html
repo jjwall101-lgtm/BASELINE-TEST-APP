@@ -6,7 +6,7 @@
 
   <title>Together Steps</title>
 
-  <link rel="stylesheet" href="style.css?v=ts-layout-6" />
+  <link rel="stylesheet" href="style.css?v=ts-layout-7" />
   <link rel="manifest" href="manifest.json" />
 
   <link rel="icon" href="icon.png" />
@@ -345,8 +345,17 @@
             <div class="panel-title">Edit Rewards Shop</div>
 
             <div class="reward-form">
-              <label for="rewardIconInput">Reward icon</label>
-              <input type="text" id="rewardIconInput" placeholder="🎮" maxlength="4" />
+              <label for="rewardIconInput">Reward graphic</label>
+              <select id="rewardIconInput">
+                <option value="story">Story book</option>
+                <option value="treat">Treat</option>
+                <option value="park">Park</option>
+                <option value="gift">Gift</option>
+                <option value="game">Game</option>
+                <option value="toy">Toy</option>
+                <option value="outing">Outing</option>
+                <option value="star">Star</option>
+              </select>
 
               <label for="rewardNameInput">Reward name</label>
               <input type="text" id="rewardNameInput" placeholder="Choose a small treat" maxlength="60" />
@@ -450,16 +459,16 @@
 
           <label for="calendarIconSelect">Icon</label>
           <select id="calendarIconSelect">
-            <option value="🏠">🏠 Home</option>
-            <option value="👩">👩 Mum</option>
-            <option value="👨">👨 Dad</option>
-            <option value="👨‍👩‍👧">👨‍👩‍👧 Family</option>
-            <option value="🏫">🏫 School</option>
-            <option value="🧸">🧸 Nursery / childcare</option>
-            <option value="👵">👵 Nan / grandparent</option>
-            <option value="🚗">🚗 Travel</option>
-            <option value="🎉">🎉 Special day</option>
-            <option value="⭐">⭐ Other</option>
+            <option value="home">Home</option>
+            <option value="mum">Mum</option>
+            <option value="dad">Dad</option>
+            <option value="family">Family</option>
+            <option value="school">School</option>
+            <option value="childcare">Nursery / childcare</option>
+            <option value="grandparent">Nan / grandparent</option>
+            <option value="travel">Travel</option>
+            <option value="special">Special day</option>
+            <option value="other">Other</option>
           </select>
 
           <label for="calendarNoteInput">Description for the child</label>
@@ -532,8 +541,20 @@
           <label for="familyNameInput">Name shown to the child</label>
           <input type="text" id="familyNameInput" placeholder="Daddy" maxlength="60" />
 
-          <label for="familyIconInput">Icon</label>
-          <input type="text" id="familyIconInput" placeholder="👨" maxlength="8" />
+          <label for="familyIconInput">Graphic</label>
+          <select id="familyIconInput">
+            <option value="parent">Parent</option>
+            <option value="child">Child</option>
+            <option value="mum">Mum</option>
+            <option value="dad">Dad</option>
+            <option value="sibling">Sibling</option>
+            <option value="grandparent">Grandparent</option>
+            <option value="family">Family</option>
+            <option value="school">School</option>
+            <option value="childcare">Childcare</option>
+            <option value="heart">Special person</option>
+            <option value="other">Other</option>
+          </select>
 
           <label for="familyBranchSelect">Branch</label>
           <select id="familyBranchSelect">
@@ -667,6 +688,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=ts-layout-6" type="module"></script>
+  <script src="script.js?v=ts-layout-7" type="module"></script>
 </body>
 </html>

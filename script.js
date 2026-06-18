@@ -25,18 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const DEFAULT_REWARDS = [
-    { id: "reward-100-story", icon: "📖", name: "Choose bedtime story", cost: 100 },
-    { id: "reward-250-treat", icon: "🍫", name: "Small treat", cost: 250 },
-    { id: "reward-500-park", icon: "🛝", name: "Park trip", cost: 500 },
-    { id: "reward-1000-prize", icon: "🎁", name: "Big prize", cost: 1000 }
+    { id: "reward-100-story", icon: "story", name: "Choose bedtime story", cost: 100 },
+    { id: "reward-250-treat", icon: "treat", name: "Small treat", cost: 250 },
+    { id: "reward-500-park", icon: "park", name: "Park trip", cost: 500 },
+    { id: "reward-1000-prize", icon: "gift", name: "Big prize", cost: 1000 }
   ];
 
   const DEFAULT_FAMILY_MEMBERS = [
-    { id: "family-child", icon: "👧", relationship: "Me", name: "Me", branch: "Child", description: "This is me." },
-    { id: "family-parent-one", icon: "👩", relationship: "Parent", name: "Parent", branch: "Parents", description: "A parent who loves and helps me." },
-    { id: "family-parent-two", icon: "👨", relationship: "Parent", name: "Parent", branch: "Parents", description: "A parent who loves and helps me." },
-    { id: "family-sibling", icon: "🧒", relationship: "Sibling", name: "Sibling", branch: "Siblings", description: "My sibling." },
-    { id: "family-grandparent", icon: "👵", relationship: "Grandparent", name: "Grandparent", branch: "Other family", description: "My grandparent." }
+    { id: "family-child", icon: "child", relationship: "Me", name: "Me", branch: "Child", description: "This is me." },
+    { id: "family-parent-one", icon: "mum", relationship: "Parent", name: "Parent", branch: "Parents", description: "A parent who loves and helps me." },
+    { id: "family-parent-two", icon: "dad", relationship: "Parent", name: "Parent", branch: "Parents", description: "A parent who loves and helps me." },
+    { id: "family-sibling", icon: "sibling", relationship: "Sibling", name: "Sibling", branch: "Siblings", description: "My sibling." },
+    { id: "family-grandparent", icon: "grandparent", relationship: "Grandparent", name: "Grandparent", branch: "Other family", description: "My grandparent." }
   ];
 
   const FEELINGS = [
@@ -51,6 +51,149 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "confused", label: "Confused", emoji: "😕", colour: "teal" },
     { id: "overwhelmed", label: "Overwhelmed", emoji: "🥴", colour: "pink" }
   ];
+
+  const REWARD_ICON_OPTIONS = [
+    ["story", "Story book"],
+    ["treat", "Treat"],
+    ["park", "Park"],
+    ["gift", "Gift"],
+    ["game", "Game"],
+    ["toy", "Toy"],
+    ["outing", "Outing"],
+    ["star", "Star"]
+  ];
+
+  const FAMILY_ICON_OPTIONS = [
+    ["parent", "Parent"],
+    ["child", "Child"],
+    ["mum", "Mum"],
+    ["dad", "Dad"],
+    ["sibling", "Sibling"],
+    ["grandparent", "Grandparent"],
+    ["family", "Family"],
+    ["school", "School"],
+    ["childcare", "Childcare"],
+    ["heart", "Special person"],
+    ["other", "Other"]
+  ];
+
+  const CALENDAR_ICON_OPTIONS = [
+    ["home", "Home"],
+    ["mum", "Mum"],
+    ["dad", "Dad"],
+    ["family", "Family"],
+    ["school", "School"],
+    ["childcare", "Nursery / childcare"],
+    ["grandparent", "Nan / grandparent"],
+    ["travel", "Travel"],
+    ["special", "Special day"],
+    ["other", "Other"]
+  ];
+
+  const ICON_ALIASES = {
+    "📖": "story", story: "story", book: "story",
+    "🍫": "treat", treat: "treat", chocolate: "treat", snack: "treat",
+    "🛝": "park", park: "park", playground: "park",
+    "🎁": "gift", gift: "gift", prize: "gift", present: "gift",
+    "🎮": "game", game: "game", gaming: "game",
+    "🧸": "toy", toy: "toy", teddy: "toy",
+    "⭐": "star", star: "star",
+    outing: "outing", trip: "outing",
+    "👧": "child", "👦": "child", child: "child", me: "child",
+    "👩": "mum", mum: "mum", mother: "mum",
+    "👨": "dad", dad: "dad", father: "dad",
+    parent: "parent",
+    "🧒": "sibling", sibling: "sibling", brother: "sibling", sister: "sibling",
+    "👵": "grandparent", grandparent: "grandparent", nan: "grandparent", grandad: "grandparent",
+    family: "family", "👨‍👩‍👧": "family",
+    school: "school", "🏫": "school",
+    childcare: "childcare", nursery: "childcare",
+    heart: "heart", special: "special", travel: "travel", "🚗": "travel",
+    home: "home", "🏠": "home",
+    other: "other", default: "other"
+  };
+
+  function normaliseIconValue(value, fallback = "other") {
+    const key = String(value || "").trim().toLowerCase();
+    return ICON_ALIASES[key] || fallback;
+  }
+
+  function optionsMarkup(options, selectedValue) {
+    return options.map(([value, label]) => `<option value="${value}"${value === selectedValue ? " selected" : ""}>${label}</option>`).join("");
+  }
+
+  function getIconLabel(key) {
+    const map = Object.fromEntries([...REWARD_ICON_OPTIONS, ...FAMILY_ICON_OPTIONS, ...CALENDAR_ICON_OPTIONS]);
+    return map[key] || key;
+  }
+
+  function getFeelingGraphicSvg(feelingId) {
+    const svgs = {
+      happy: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#fde047" stroke="#1f1f1f" stroke-width="4"/><circle cx="24" cy="27" r="3" fill="#1f1f1f"/><circle cx="40" cy="27" r="3" fill="#1f1f1f"/><path d="M22 38c3 5 7 7 10 7s7-2 10-7" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+      sad: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#93c5fd" stroke="#1f1f1f" stroke-width="4"/><circle cx="24" cy="27" r="3" fill="#1f1f1f"/><circle cx="40" cy="27" r="3" fill="#1f1f1f"/><path d="M22 42c3-4 7-6 10-6s7 2 10 6" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/><path d="M44 32c0 6 4 7 4 10" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/></svg>`,
+      angry: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#f87171" stroke="#1f1f1f" stroke-width="4"/><path d="M20 26l8-3M44 26l-8-3" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="31" r="3" fill="#1f1f1f"/><circle cx="40" cy="31" r="3" fill="#1f1f1f"/><path d="M22 43c3-3 7-4 10-4s7 1 10 4" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+      worried: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#c4b5fd" stroke="#1f1f1f" stroke-width="4"/><circle cx="24" cy="28" r="3" fill="#1f1f1f"/><circle cx="40" cy="28" r="3" fill="#1f1f1f"/><path d="M24 42c2-2 5-3 8-3s6 1 8 3" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+      scared: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#d1d5db" stroke="#1f1f1f" stroke-width="4"/><circle cx="24" cy="27" r="3" fill="#1f1f1f"/><circle cx="40" cy="27" r="3" fill="#1f1f1f"/><ellipse cx="32" cy="41" rx="5" ry="7" fill="#fff" stroke="#1f1f1f" stroke-width="3"/></svg>`,
+      tired: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/><path d="M20 29h8M36 29h8" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/><path d="M24 41c2 1 5 2 8 2s6-1 8-2" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+      excited: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#fdba74" stroke="#1f1f1f" stroke-width="4"/><path d="M20 28l5 3 4-5M39 26l4 5 5-3" fill="none" stroke="#1f1f1f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 38c4 5 7 7 10 7s6-2 10-7" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+      calm: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#86efac" stroke="#1f1f1f" stroke-width="4"/><circle cx="24" cy="28" r="2.5" fill="#1f1f1f"/><circle cx="40" cy="28" r="2.5" fill="#1f1f1f"/><path d="M23 39c3 3 6 4 9 4s6-1 9-4" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+      confused: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#5eead4" stroke="#1f1f1f" stroke-width="4"/><circle cx="24" cy="29" r="3" fill="#1f1f1f"/><circle cx="40" cy="29" r="3" fill="#1f1f1f"/><path d="M23 42c2-1 4-2 7-2 4 0 6 1 11-1" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+      overwhelmed: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#f9a8d4" stroke="#1f1f1f" stroke-width="4"/><circle cx="24" cy="28" r="3" fill="#1f1f1f"/><circle cx="40" cy="28" r="3" fill="#1f1f1f"/><path d="M22 41c2 2 5 2 10 0 5-2 8-2 10 0" fill="none" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`
+    };
+    return svgs[feelingId] || svgs.happy;
+  }
+
+  function getCustomGraphicSvg(group, rawKey) {
+    const key = normaliseIconValue(rawKey, group === "reward" ? "gift" : group === "calendar" ? "home" : group === "family" ? "family" : "other");
+    const common = {stroke: '#1f1f1f'};
+    const svgs = {
+      reward: {
+        story: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="12" width="36" height="40" rx="5" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/><path d="M24 18h16M24 26h16M24 34h12" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/></svg>`,
+        treat: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M20 26c0-6 5-10 12-10s12 4 12 10-4 10-12 10-12-4-12-10Z" fill="#f59e0b" stroke="#1f1f1f" stroke-width="4"/><path d="M24 35h16l-3 12H27Z" fill="#f97316" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        park: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M18 18h10v10H18zM36 18h10v10H36z" fill="#22c55e" stroke="#1f1f1f" stroke-width="4"/><path d="M23 28v18M41 28v18" stroke="#1f1f1f" stroke-width="4"/><path d="M23 30c3 8 8 14 18 16" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linecap="round"/></svg>`,
+        gift: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="24" width="36" height="26" rx="4" fill="#fb7185" stroke="#1f1f1f" stroke-width="4"/><rect x="12" y="20" width="40" height="10" rx="3" fill="#fda4af" stroke="#1f1f1f" stroke-width="4"/><path d="M32 20v30M14 34h36" stroke="#ffffff" stroke-width="4"/><path d="M32 18c-2-8-12-8-12-1 0 5 6 5 12 3Zm0 0c2-8 12-8 12-1 0 5-6 5-12 3Z" fill="#fde68a" stroke="#1f1f1f" stroke-width="3"/></svg>`,
+        game: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="22" width="40" height="20" rx="10" fill="#a78bfa" stroke="#1f1f1f" stroke-width="4"/><path d="M24 28v8M20 32h8M40 30h0M46 34h0" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+        toy: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="8" fill="#fbbf24" stroke="#1f1f1f" stroke-width="4"/><circle cx="42" cy="22" r="8" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/><circle cx="22" cy="42" r="8" fill="#34d399" stroke="#1f1f1f" stroke-width="4"/><circle cx="42" cy="42" r="8" fill="#f472b6" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        outing: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M18 44 32 18 46 44Z" fill="#22c55e" stroke="#1f1f1f" stroke-width="4"/><path d="M14 46h36" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/><circle cx="46" cy="18" r="6" fill="#fde047" stroke="#1f1f1f" stroke-width="3"/></svg>`,
+        star: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><polygon points="32,12 37,25 51,26 40,35 44,49 32,41 20,49 24,35 13,26 27,25" fill="#facc15" stroke="#1f1f1f" stroke-width="4" stroke-linejoin="round"/></svg>`
+      },
+      family: {
+        child: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="22" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M20 50c2-10 8-16 12-16s10 6 12 16" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        parent: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="20" r="11" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-12 8-18 14-18s12 6 14 18" fill="#a78bfa" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        mum: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="21" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M21 22c0-9 22-9 22 0" fill="#7c3aed" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#f472b6" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        dad: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="21" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M21 20c2-8 20-8 22 0" fill="#92400e" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        sibling: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="22" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#34d399" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        grandparent: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="21" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M21 20c2-6 20-6 22 0" fill="#d1d5db" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#94a3b8" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        family: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="24" r="7" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="3"/><circle cx="42" cy="24" r="7" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="3"/><circle cx="32" cy="18" r="7" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="3"/><path d="M14 48c2-8 6-12 8-12 5 0 6 2 10 2s5-2 10-2c2 0 6 4 8 12" fill="#86efac" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        school: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 26 32 14l18 12v22H14Z" fill="#facc15" stroke="#1f1f1f" stroke-width="4" stroke-linejoin="round"/><path d="M28 46V34h8v12M22 28h5M37 28h5" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+        childcare: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="7" fill="#fbbf24" stroke="#1f1f1f" stroke-width="4"/><circle cx="42" cy="22" r="7" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/><path d="M20 42c2-6 6-10 12-10s10 4 12 10" fill="#f472b6" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        heart: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 52 14 34c-5-6-4-16 4-20 5-2 10 0 14 5 4-5 9-7 14-5 8 4 9 14 4 20Z" fill="#fb7185" stroke="#1f1f1f" stroke-width="4" stroke-linejoin="round"/></svg>`,
+        other: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="22" r="10" fill="#e5e7eb" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#9ca3af" stroke="#1f1f1f" stroke-width="4"/></svg>`
+      },
+      calendar: {
+        home: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 28 32 15l18 13v20H14Z" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4" stroke-linejoin="round"/><path d="M28 48V35h8v13" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/></svg>`,
+        mum: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="20" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#f472b6" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        dad: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="20" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        family: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="24" r="7" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="3"/><circle cx="42" cy="24" r="7" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="3"/><path d="M16 48c2-8 7-12 10-12 3 0 4 1 6 1s3-1 6-1 8 4 10 12" fill="#86efac" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        school: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 26 32 14l18 12v22H14Z" fill="#facc15" stroke="#1f1f1f" stroke-width="4"/><path d="M28 46V34h8v12" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        childcare: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="7" fill="#fbbf24" stroke="#1f1f1f" stroke-width="4"/><circle cx="42" cy="22" r="7" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/><path d="M20 42c2-6 6-10 12-10s10 4 12 10" fill="#f472b6" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        grandparent: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="20" r="10" fill="#fcd7b6" stroke="#1f1f1f" stroke-width="4"/><path d="M18 50c2-10 8-16 14-16s12 6 14 16" fill="#94a3b8" stroke="#1f1f1f" stroke-width="4"/></svg>`,
+        travel: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 40h36l-4-10c-1-3-3-5-7-5H28c-4 0-6 2-8 5l-6 10Z" fill="#ef4444" stroke="#1f1f1f" stroke-width="4"/><circle cx="22" cy="49" r="5" fill="#1f2937"/><circle cx="44" cy="49" r="5" fill="#1f2937"/></svg>`,
+        special: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 52 14 34c-5-6-4-16 4-20 5-2 10 0 14 5 4-5 9-7 14-5 8 4 9 14 4 20Z" fill="#fb7185" stroke="#1f1f1f" stroke-width="4"/><circle cx="32" cy="32" r="4" fill="#fde68a" stroke="#1f1f1f" stroke-width="2"/></svg>`,
+        other: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="20" fill="#e5e7eb" stroke="#1f1f1f" stroke-width="4"/><path d="M32 21v14" stroke="#1f1f1f" stroke-width="4" stroke-linecap="round"/><circle cx="32" cy="46" r="2.8" fill="#1f1f1f"/></svg>`
+      }
+    };
+    return (svgs[group] && svgs[group][key]) || (svgs[group] && svgs[group].other) || '';
+  }
+
+  function graphicMarkup(group, key, sizeClass = "graphic-md") {
+    return `<span class="custom-graphic ${sizeClass}" aria-hidden="true">${getCustomGraphicSvg(group, key)}</span>`;
+  }
+
+  function feelingGraphicMarkup(feelingId, sizeClass = "graphic-md") {
+    return `<span class="custom-graphic ${sizeClass}" aria-hidden="true">${getFeelingGraphicSvg(feelingId)}</span>`;
+  }
+
 
   let parentUnlocked = false;
   let childMode = localStorage.getItem(CHILD_MODE_KEY) !== "false";
@@ -292,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .filter(reward => reward && typeof reward === "object")
       .map(reward => ({
         id: reward.id || `reward-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-        icon: String(reward.icon || "🎁").slice(0, 4),
+        icon: normaliseIconValue(reward.icon, "gift"),
         name: String(reward.name || "Reward").slice(0, 60),
         cost: Math.max(1, Math.min(10000, Number(reward.cost) || 100))
       }))
@@ -311,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
         id: request.id || `request-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         rewardId: request.rewardId || "",
         rewardName: String(request.rewardName || "Reward").slice(0, 80),
-        rewardIcon: String(request.rewardIcon || "🎁").slice(0, 4),
+        rewardIcon: normaliseIconValue(request.rewardIcon, "gift"),
         rewardCost: Math.max(1, Number(request.rewardCost) || 1),
         status: ["pending", "approved", "rejected"].includes(request.status) ? request.status : "pending",
         requestedAt: request.requestedAt || "",
@@ -354,7 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
         id: entry.id || `calendar-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         dateISO: entry.dateISO || "",
         who: String(entry.who || "").slice(0, 50),
-        icon: String(entry.icon || "⭐").slice(0, 8),
+        icon: normaliseIconValue(entry.icon, "home"),
         note: String(entry.note || "").slice(0, 300),
         updatedAt: entry.updatedAt || ""
       }))
@@ -370,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .filter(member => member && typeof member === "object")
       .map(member => ({
         id: member.id || `family-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-        icon: String(member.icon || "⭐").slice(0, 8),
+        icon: normaliseIconValue(member.icon, "family"),
         relationship: String(member.relationship || "Family").slice(0, 40),
         name: String(member.name || "Family").slice(0, 60),
         branch: String(member.branch || "Other family").slice(0, 40),
@@ -969,7 +1112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       type: "feeling",
       level: "feeling",
       category: "Feeling",
-      text: `Feeling recorded: ${feeling.emoji} ${feeling.label}`,
+      text: `Feeling recorded: ${feeling.label}`,
       coinChange: 0,
       coinsAfter: data.coinTotal
     });
@@ -977,11 +1120,11 @@ document.addEventListener("DOMContentLoaded", () => {
     await saveData(data);
 
     await showPhoneNotification("Feeling shared", {
-      body: `Your child feels ${feeling.emoji} ${feeling.label}`,
+      body: `Your child feels ${feeling.label}`,
       tag: `feeling-${feeling.id}-${getDateISO(now)}`
     });
 
-    alert(`You chose: ${feeling.emoji} ${feeling.label}`);
+    alert(`You chose: ${feeling.label}`);
   }
 
   function updateFeelingsPage() {
@@ -995,7 +1138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (elements.latestFeelingChild) {
       if (latest && latest.dateISO === getDateISO()) {
-        elements.latestFeelingChild.textContent = `Today: ${latest.emoji} ${latest.label}`;
+        elements.latestFeelingChild.innerHTML = `Today: ${feelingGraphicMarkup(latest.feelingId, "graphic-inline-sm")} <span>${latest.label}</span>`;
       } else {
         elements.latestFeelingChild.textContent = "No feeling chosen yet today.";
       }
@@ -1009,7 +1152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       button.className = `feeling-face feeling-${feeling.colour}`;
       button.setAttribute("aria-label", feeling.label);
       button.innerHTML = `
-        <span class="feeling-emoji">${feeling.emoji}</span>
+        <span class="feeling-emoji custom-face-icon">${getFeelingGraphicSvg(feeling.id)}</span>
         <strong>${feeling.label}</strong>
       `;
       button.addEventListener("click", () => logFeeling(feeling.id));
@@ -1042,7 +1185,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const item = document.createElement("article");
       item.className = "parent-feeling-item";
       item.innerHTML = `
-        <div class="parent-feeling-icon">${log.emoji}</div>
+        <div class="parent-feeling-icon">${getFeelingGraphicSvg(log.feelingId)}</div>
         <div>
           <strong>${log.label}</strong>
           <span>${log.dateText || "No date"}</span>
@@ -1092,7 +1235,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addHistoryEntry(data, {
       type: "reward",
       level: "request",
-      text: `Reward requested: ${reward.icon} ${reward.name}`,
+      text: `Reward requested: ${reward.name}`,
       coinChange: 0,
       coinsAfter: data.coinTotal
     });
@@ -1143,7 +1286,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addHistoryEntry(data, {
       type: "reward",
       level: "approved",
-      text: `Reward approved: ${request.rewardIcon} ${request.rewardName}`,
+      text: `Reward approved: ${request.rewardName}`,
       coinChange: -request.rewardCost,
       coinsAfter: data.coinTotal
     });
@@ -1181,7 +1324,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addHistoryEntry(data, {
       type: "reward",
       level: "rejected",
-      text: `Reward rejected: ${request.rewardIcon} ${request.rewardName}`,
+      text: `Reward rejected: ${request.rewardName}`,
       coinChange: 0,
       coinsAfter: data.coinTotal
     });
@@ -1280,7 +1423,7 @@ document.addEventListener("DOMContentLoaded", () => {
       elements.childNextReward.innerHTML = `
         <span class="child-feeling-text">Today I feel</span>
         <span class="child-feeling-face feeling-${latestFeeling.colour}" aria-label="${latestFeeling.label}">
-          <span>${latestFeeling.emoji}</span>
+          ${getFeelingGraphicSvg(latestFeeling.feelingId)}
         </span>
       `;
       return;
@@ -1292,9 +1435,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (total >= next.cost) {
-      elements.childNextReward.textContent = `${next.icon} ${next.name} is ready!`;
+      elements.childNextReward.innerHTML = `${graphicMarkup("reward", next.icon, "graphic-inline-sm")} <span>${next.name} is ready!</span>`;
     } else {
-      elements.childNextReward.textContent = `${next.icon} ${next.name}: ${next.cost - total} coins to go`;
+      elements.childNextReward.innerHTML = `${graphicMarkup("reward", next.icon, "graphic-inline-sm")} <span>${next.name}: ${next.cost - total} coins to go</span>`;
     }
   }
 
@@ -1326,7 +1469,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const info = document.createElement("div");
       info.className = "reward-request-info";
-      info.innerHTML = `<strong>${request.rewardIcon} ${request.rewardName}</strong><span>${request.rewardCost} coins</span>`;
+      info.innerHTML = `<strong>${graphicMarkup("reward", request.rewardIcon, "graphic-inline-sm")} ${request.rewardName}</strong><span>${request.rewardCost} coins</span>`;
 
       const actions = document.createElement("div");
       actions.className = "reward-request-actions";
@@ -1366,7 +1509,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const members = normalizeFamilyTree(currentData.familyTree);
     const child = members.find(member => member.branch === "Child") || {
-      icon: "👦",
+      icon: "child",
       relationship: "Me",
       name: "Me",
       description: "This is me."
@@ -1387,7 +1530,7 @@ document.addEventListener("DOMContentLoaded", () => {
     display.innerHTML = `
       <div class="family-tree-root">
         <div class="family-tree-person family-tree-main-person">
-          <div class="family-person-icon">${escapeAttr(child.icon)}</div>
+          <div class="family-person-icon">${getCustomGraphicSvg("family", child.icon)}</div>
           <div>
             <strong>${escapeAttr(child.name)}</strong>
             <span>${escapeAttr(child.relationship)}</span>
@@ -1416,7 +1559,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const card = document.createElement("article");
           card.className = "family-tree-person";
           card.innerHTML = `
-            <div class="family-person-icon">${escapeAttr(member.icon)}</div>
+            <div class="family-person-icon">${getCustomGraphicSvg("family", member.icon)}</div>
             <div>
               <strong>${escapeAttr(member.name)}</strong>
               <span>${escapeAttr(member.relationship)}</span>
@@ -1440,7 +1583,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const relationship = elements.familyRelationshipInput?.value.trim() || "";
     const name = elements.familyNameInput?.value.trim() || "";
-    const icon = elements.familyIconInput?.value.trim() || "⭐";
+    const icon = elements.familyIconInput?.value || "parent";
     const branch = elements.familyBranchSelect?.value || "Other family";
     const description = elements.familyDescriptionInput?.value.trim() || "";
 
@@ -1492,7 +1635,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (elements.familyRelationshipInput) elements.familyRelationshipInput.value = "";
     if (elements.familyNameInput) elements.familyNameInput.value = "";
-    if (elements.familyIconInput) elements.familyIconInput.value = "";
+    if (elements.familyIconInput) elements.familyIconInput.value = "parent";
     if (elements.familyBranchSelect) elements.familyBranchSelect.value = "Parents";
     if (elements.familyDescriptionInput) elements.familyDescriptionInput.value = "";
     if (elements.addFamilyMemberButton) elements.addFamilyMemberButton.textContent = "Add Family Member";
@@ -1580,7 +1723,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const info = document.createElement("div");
       info.className = "family-member-editor-info";
       info.innerHTML = `
-        <span class="family-member-editor-icon">${escapeAttr(member.icon)}</span>
+        <span class="family-member-editor-icon">${getCustomGraphicSvg("family", member.icon)}</span>
         <div>
           <strong>${escapeAttr(member.relationship)} - ${escapeAttr(member.name)}</strong>
           <span>${escapeAttr(member.branch)}</span>
@@ -1635,7 +1778,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const latestFeeling = normalizeFeelingLogs(currentData.feelingLogs)[0];
     const latestFeelingText = latestFeeling
-      ? `${latestFeeling.emoji} ${latestFeeling.label}`
+      ? `${latestFeeling.label}`
       : "None";
 
     grid.innerHTML = "";
@@ -1679,7 +1822,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return `
         <div class="calendar-detail-main selected-calendar-detail" data-selected-date="${dateISO}">
-          <div class="calendar-detail-icon">${safeIcon}</div>
+          <div class="calendar-detail-icon">${getCustomGraphicSvg("calendar", safeIcon)}</div>
           <div>
             <strong>${dateTitle}</strong>
             <span>Child is with ${safeWho}</span>
@@ -1691,7 +1834,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     return `
       <div class="calendar-detail-main selected-calendar-detail" data-selected-date="${dateISO}">
-        <div class="calendar-detail-icon">📅</div>
+        <div class="calendar-detail-icon">${getCustomGraphicSvg("calendar", "other")}</div>
         <div>
           <strong>${dateTitle}</strong>
           <span>No plan has been added for this day yet.</span>
@@ -1711,7 +1854,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (elements.calendarIconSelect) {
-      elements.calendarIconSelect.value = entry?.icon || "🏠";
+      elements.calendarIconSelect.value = normaliseIconValue(entry?.icon || "home", "home");
     }
 
     if (elements.calendarNoteInput) {
@@ -1801,7 +1944,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <strong>${day}</strong>
         <span class="calendar-month">${month}</span>
         <div class="calendar-person">
-          <span class="calendar-person-icon">${entry?.icon || "—"}</span>
+          <span class="calendar-person-icon">${entry ? getCustomGraphicSvg("calendar", entry.icon) : getCustomGraphicSvg("calendar", "other")}</span>
           <span class="calendar-person-name">${entry?.who || "No plan"}</span>
         </div>
       `;
@@ -1837,7 +1980,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const dateISO = elements.calendarDateInput?.value || "";
     const who = elements.calendarWhoInput?.value.trim() || "";
-    const icon = elements.calendarIconSelect?.value || "⭐";
+    const icon = elements.calendarIconSelect?.value || "other";
     const note = elements.calendarNoteInput?.value.trim() || "";
 
     if (!dateISO) {
@@ -1940,7 +2083,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addHistoryEntry(data, {
       type: "reward",
       level: "claimed",
-      text: `Reward claimed: ${reward.icon} ${reward.name}`,
+      text: `Reward claimed: ${reward.name}`,
       coinChange: -reward.cost,
       coinsAfter: data.coinTotal
     });
@@ -1958,7 +2101,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const icon = elements.rewardIconInput?.value.trim() || "🎁";
+    const icon = elements.rewardIconInput?.value || "gift";
     const name = elements.rewardNameInput?.value.trim() || "";
     const cost = Math.round(Number(elements.rewardCostInput?.value) || 0);
 
@@ -1981,7 +2124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cost: Math.max(1, Math.min(10000, cost))
     });
 
-    elements.rewardIconInput.value = "";
+    elements.rewardIconInput.value = "gift";
     elements.rewardNameInput.value = "";
     elements.rewardCostInput.value = "";
 
@@ -1999,7 +2142,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const icon = row.querySelector(".reward-edit-icon").value.trim() || "🎁";
+    const icon = row.querySelector(".reward-edit-icon").value || "gift";
     const name = row.querySelector(".reward-edit-name").value.trim();
     const cost = Math.round(Number(row.querySelector(".reward-edit-cost").value) || 0);
 
@@ -2723,7 +2866,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextReward = rewards.find(reward => reward.cost > total);
 
     if (nextReward) {
-      elements.nextRewardText.textContent = `Next reward: ${nextReward.icon} ${nextReward.name} - ${nextReward.cost - total} coins to go`;
+      elements.nextRewardText.textContent = `Next reward: ${nextReward.name} - ${nextReward.cost - total} coins to go`;
     } else if (rewards.length) {
       elements.nextRewardText.textContent = "All rewards are affordable!";
     } else {
@@ -2815,7 +2958,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const icon = document.createElement("div");
       icon.className = "reward-shop-icon";
-      icon.textContent = reward.icon;
+      icon.innerHTML = getCustomGraphicSvg("reward", reward.icon);
 
       const info = document.createElement("div");
       info.className = "reward-shop-info";
@@ -2878,8 +3021,8 @@ document.addEventListener("DOMContentLoaded", () => {
       item.dataset.rewardEditorId = reward.id;
 
       item.innerHTML = `
-        <label>Icon</label>
-        <input class="reward-edit-icon" maxlength="4" value="${escapeAttr(reward.icon)}" />
+        <label>Graphic</label>
+        <select class="reward-edit-icon">${optionsMarkup(REWARD_ICON_OPTIONS, normaliseIconValue(reward.icon, "gift"))}</select>
         <label>Reward</label>
         <input class="reward-edit-name" maxlength="60" value="${escapeAttr(reward.name)}" />
         <label>Cost</label>
@@ -3215,7 +3358,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-6");
+      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-7");
       await navigator.serviceWorker.ready;
       return serviceWorkerRegistration;
     } catch (error) {
