@@ -2687,6 +2687,8 @@ body.child-mode .child-dashboard-card .child-big-coins {
 
 body.child-mode .profile-card h1 {
   margin-bottom: 4px;
+  font-size: clamp(28px, 8.2vw, 42px);
+  padding-right: 120px;
 }
 
 body.child-mode .power-row {
@@ -3287,22 +3289,24 @@ body.child-mode .timer-custom {
 
 /* Together Steps profile photo and extra theme support */
 .profile-photo-card {
-  width: min(100%, 290px);
-  margin: 12px auto 10px;
+  width: min(100%, 360px);
+  margin: 16px auto 12px;
   border: 5px solid var(--outline);
   box-shadow: 5px 5px 0 var(--outline);
   border-radius: 30px;
-  padding: 14px;
+  padding: 18px 14px 16px;
   background: rgba(255,255,255,0.78);
   display: grid;
   justify-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .profile-photo-preview,
 .profile-photo-placeholder {
-  width: min(58vw, 200px);
-  height: min(58vw, 200px);
+  width: min(72vw, 280px);
+  height: min(72vw, 280px);
+  max-width: 280px;
+  max-height: 280px;
   border-radius: 50%;
   border: 6px solid var(--outline);
   box-shadow: 5px 5px 0 var(--outline);
@@ -3317,12 +3321,12 @@ body.child-mode .timer-custom {
   display: grid;
   place-items: center;
   background: linear-gradient(180deg, #e9f3ff, #d7eaff);
-  font-size: 42px;
+  font-size: 56px;
 }
 
 .profile-photo-card p {
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 900;
 }
 
