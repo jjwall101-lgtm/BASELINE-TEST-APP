@@ -36,6 +36,47 @@ html[data-theme="bunny"] {
   --theme-dark: #831843;
 }
 
+html[data-theme="princess"] {
+  --theme-bg:
+    radial-gradient(circle at 15% 15%, rgba(255,255,255,.9) 0 24px, transparent 25px),
+    radial-gradient(circle at 80% 18%, rgba(255,255,255,.65) 0 20px, transparent 21px),
+    linear-gradient(180deg, #ffe4f1 0%, #ffd1e8 52%, #f5d0fe 100%);
+  --theme-card: #fff8fd;
+  --theme-accent: #f472b6;
+  --theme-dark: #7a1450;
+}
+
+html[data-theme="football"] {
+  --theme-bg: linear-gradient(180deg, #d9f99d 0%, #bbf7d0 46%, #4ade80 47%, #22c55e 100%);
+  --theme-card: #f8fff4;
+  --theme-accent: #22c55e;
+  --theme-dark: #083d18;
+}
+
+html[data-theme="car"] {
+  --theme-bg: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 42%, #cbd5e1 43%, #94a3b8 100%);
+  --theme-card: #ffffff;
+  --theme-accent: #ef4444;
+  --theme-dark: #ffffff;
+}
+
+html[data-theme="blue"] {
+  --theme-bg: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+  --theme-card: #f8fbff;
+  --theme-accent: #2563eb;
+  --theme-dark: #ffffff;
+}
+
+html[data-theme="flower"] {
+  --theme-bg:
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.85) 0 20px, transparent 21px),
+    radial-gradient(circle at 82% 14%, rgba(255,255,255,.72) 0 18px, transparent 19px),
+    linear-gradient(180deg, #fdf2f8 0%, #ffe4e6 44%, #dcfce7 45%, #bbf7d0 100%);
+  --theme-card: #fffdf7;
+  --theme-accent: #fb7185;
+  --theme-dark: #7f1d1d;
+}
+
 html[data-theme="mario"] {
   --theme-bg: linear-gradient(180deg, #79d8ff 0%, #bdf2ff 44%, #69d45d 45%, #47aa45 100%);
   --theme-card: #fff8d6;
@@ -1106,29 +1147,63 @@ html[data-theme="space"] .report-stat {
 }
 
 .grass,
-.mc-grass {
-  height: 16px;
-  background: #55bf4b;
-}
-
 .dirt,
-.mc-dirt {
-  height: 28px;
-  background: repeating-linear-gradient(90deg, #8a5733 0 18px, #714226 18px 36px);
-}
-
 .moon-top,
 .moon-base,
 .mc-grass,
-.mc-dirt {
+.mc-dirt,
+.bunny-ground-top,
+.bunny-ground-base,
+.princess-ground-top,
+.princess-ground-base,
+.football-ground-top,
+.football-ground-base,
+.car-ground-top,
+.car-ground-base,
+.blue-ground-top,
+.blue-ground-base,
+.flower-ground-top,
+.flower-ground-base {
   display: none;
 }
 
-html[data-theme="space"] .grass,
-html[data-theme="space"] .dirt,
-html[data-theme="minecraft"] .grass,
-html[data-theme="minecraft"] .dirt {
-  display: none;
+.grass,
+.mc-grass,
+.bunny-ground-top,
+.princess-ground-top,
+.football-ground-top,
+.car-ground-top,
+.blue-ground-top,
+.flower-ground-top,
+.moon-top {
+  height: 16px;
+}
+
+.dirt,
+.mc-dirt,
+.bunny-ground-base,
+.princess-ground-base,
+.football-ground-base,
+.car-ground-base,
+.blue-ground-base,
+.flower-ground-base,
+.moon-base {
+  height: 28px;
+}
+
+html[data-theme="plain"] .grass,
+html[data-theme="plain"] .dirt,
+html[data-theme="mario"] .grass,
+html[data-theme="mario"] .dirt {
+  display: block;
+}
+
+.grass {
+  background: #55bf4b;
+}
+
+.dirt {
+  background: repeating-linear-gradient(90deg, #8a5733 0 18px, #714226 18px 36px);
 }
 
 html[data-theme="space"] .moon-top,
@@ -1137,18 +1212,102 @@ html[data-theme="space"] .moon-base {
 }
 
 html[data-theme="space"] .moon-top {
-  height: 16px;
   background: #d7def1;
 }
 
 html[data-theme="space"] .moon-base {
-  height: 28px;
   background: repeating-linear-gradient(90deg, #a6b0c8 0 18px, #8e98b0 18px 36px);
 }
 
 html[data-theme="minecraft"] .mc-grass,
 html[data-theme="minecraft"] .mc-dirt {
   display: block;
+}
+
+.mc-grass {
+  background: linear-gradient(90deg, #4b9d35 0 25%, #66b748 25% 50%, #4b9d35 50% 75%, #66b748 75% 100%);
+}
+
+.mc-dirt {
+  background: repeating-linear-gradient(90deg, #8a5733 0 18px, #714226 18px 36px);
+}
+
+html[data-theme="bunny"] .bunny-ground-top,
+html[data-theme="bunny"] .bunny-ground-base {
+  display: block;
+}
+
+.bunny-ground-top {
+  background: linear-gradient(90deg, #f9a8d4, #fbcfe8, #f9a8d4);
+}
+
+.bunny-ground-base {
+  background: repeating-linear-gradient(90deg, #fb923c 0 16px, #fdba74 16px 32px);
+}
+
+html[data-theme="princess"] .princess-ground-top,
+html[data-theme="princess"] .princess-ground-base {
+  display: block;
+}
+
+.princess-ground-top {
+  background: linear-gradient(90deg, #f9a8d4, #f5d0fe, #f9a8d4);
+}
+
+.princess-ground-base {
+  background: repeating-linear-gradient(90deg, #f472b6 0 16px, #fbcfe8 16px 32px);
+}
+
+html[data-theme="football"] .football-ground-top,
+html[data-theme="football"] .football-ground-base {
+  display: block;
+}
+
+.football-ground-top {
+  background: linear-gradient(90deg, #16a34a, #22c55e, #16a34a);
+}
+
+.football-ground-base {
+  background: repeating-linear-gradient(90deg, #ecfccb 0 18px, #bbf7d0 18px 36px);
+}
+
+html[data-theme="car"] .car-ground-top,
+html[data-theme="car"] .car-ground-base {
+  display: block;
+}
+
+.car-ground-top {
+  background: linear-gradient(90deg, #94a3b8, #cbd5e1, #94a3b8);
+}
+
+.car-ground-base {
+  background: repeating-linear-gradient(90deg, #475569 0 14px, #64748b 14px 28px, #f8fafc 28px 32px, #64748b 32px 46px);
+}
+
+html[data-theme="blue"] .blue-ground-top,
+html[data-theme="blue"] .blue-ground-base {
+  display: block;
+}
+
+.blue-ground-top {
+  background: linear-gradient(90deg, #60a5fa, #93c5fd, #60a5fa);
+}
+
+.blue-ground-base {
+  background: repeating-linear-gradient(90deg, #2563eb 0 18px, #3b82f6 18px 36px);
+}
+
+html[data-theme="flower"] .flower-ground-top,
+html[data-theme="flower"] .flower-ground-base {
+  display: block;
+}
+
+.flower-ground-top {
+  background: linear-gradient(90deg, #86efac, #bbf7d0, #86efac);
+}
+
+.flower-ground-base {
+  background: repeating-linear-gradient(90deg, #fb7185 0 14px, #fecdd3 14px 28px, #f9a8d4 28px 42px);
 }
 
 
@@ -3425,6 +3584,25 @@ html[data-theme="plain"] .power-row {
   animation: heartPulse 2.2s infinite ease-in-out;
 }
 
+.theme-emoji-art {
+  width: 44px;
+  height: 44px;
+  display: none;
+  place-items: center;
+  border: 4px solid var(--outline);
+  box-shadow: 3px 3px 0 var(--outline);
+  border-radius: 50%;
+  background: white;
+  font-size: 24px;
+  animation: heartPulse 2.2s infinite ease-in-out;
+}
+
+.princess-art { background: #fbcfe8; }
+.football-art { background: #dcfce7; }
+.car-theme-art { background: #e2e8f0; }
+.blue-theme-art { background: #dbeafe; }
+.flower-theme-art { background: #ffe4e6; }
+
 html[data-theme="mario"] .bunny-art,
 html[data-theme="mario"] .carrot-art,
 html[data-theme="mario"] .heart-art,
@@ -3444,8 +3622,76 @@ html[data-theme="bunny"] .mushroom-art,
 html[data-theme="bunny"] .rocket-art,
 html[data-theme="bunny"] .astronaut-helmet,
 html[data-theme="bunny"] .minecraft-character,
-html[data-theme="bunny"] .minecraft-block {
+html[data-theme="bunny"] .minecraft-block,
+html[data-theme="bunny"] .theme-emoji-art,
+html[data-theme="princess"] .question-block,
+html[data-theme="princess"] .coin-art,
+html[data-theme="princess"] .brick-block,
+html[data-theme="princess"] .mushroom-art,
+html[data-theme="princess"] .rocket-art,
+html[data-theme="princess"] .astronaut-helmet,
+html[data-theme="princess"] .minecraft-character,
+html[data-theme="princess"] .minecraft-block,
+html[data-theme="princess"] .bunny-art,
+html[data-theme="princess"] .carrot-art,
+html[data-theme="princess"] .heart-art,
+html[data-theme="football"] .question-block,
+html[data-theme="football"] .coin-art,
+html[data-theme="football"] .brick-block,
+html[data-theme="football"] .mushroom-art,
+html[data-theme="football"] .rocket-art,
+html[data-theme="football"] .astronaut-helmet,
+html[data-theme="football"] .minecraft-character,
+html[data-theme="football"] .minecraft-block,
+html[data-theme="football"] .bunny-art,
+html[data-theme="football"] .carrot-art,
+html[data-theme="football"] .heart-art,
+html[data-theme="car"] .question-block,
+html[data-theme="car"] .coin-art,
+html[data-theme="car"] .brick-block,
+html[data-theme="car"] .mushroom-art,
+html[data-theme="car"] .rocket-art,
+html[data-theme="car"] .astronaut-helmet,
+html[data-theme="car"] .minecraft-character,
+html[data-theme="car"] .minecraft-block,
+html[data-theme="car"] .bunny-art,
+html[data-theme="car"] .carrot-art,
+html[data-theme="car"] .heart-art,
+html[data-theme="football"] .theme-emoji-art,
+html[data-theme="car"] .theme-emoji-art,
+html[data-theme="blue"] .question-block,
+html[data-theme="blue"] .coin-art,
+html[data-theme="blue"] .brick-block,
+html[data-theme="blue"] .mushroom-art,
+html[data-theme="blue"] .rocket-art,
+html[data-theme="blue"] .astronaut-helmet,
+html[data-theme="blue"] .minecraft-character,
+html[data-theme="blue"] .minecraft-block,
+html[data-theme="blue"] .bunny-art,
+html[data-theme="blue"] .carrot-art,
+html[data-theme="blue"] .heart-art,
+html[data-theme="blue"] .theme-emoji-art,
+html[data-theme="flower"] .question-block,
+html[data-theme="flower"] .coin-art,
+html[data-theme="flower"] .brick-block,
+html[data-theme="flower"] .mushroom-art,
+html[data-theme="flower"] .rocket-art,
+html[data-theme="flower"] .astronaut-helmet,
+html[data-theme="flower"] .minecraft-character,
+html[data-theme="flower"] .minecraft-block,
+html[data-theme="flower"] .bunny-art,
+html[data-theme="flower"] .carrot-art,
+html[data-theme="flower"] .heart-art,
+html[data-theme="flower"] .theme-emoji-art {
   display: none;
+}
+
+html[data-theme="princess"] .princess-art,
+html[data-theme="football"] .football-art,
+html[data-theme="car"] .car-theme-art,
+html[data-theme="blue"] .blue-theme-art,
+html[data-theme="flower"] .flower-theme-art {
+  display: grid;
 }
 
 html[data-theme="bunny"] .hero-child-coins {
@@ -3470,4 +3716,45 @@ html[data-theme="bunny"] .hero-child-streak {
 @keyframes heartPulse {
   0%,100% { transform: scale(1); }
   50% { transform: scale(1.08); }
+}
+
+html[data-theme="princess"] .hero-child-coins {
+  background: linear-gradient(180deg, #fce7f3, #f9a8d4);
+}
+
+html[data-theme="princess"] .hero-child-streak {
+  background: linear-gradient(180deg, #f5d0fe, #e879f9);
+}
+
+html[data-theme="football"] .hero-child-coins {
+  background: linear-gradient(180deg, #dcfce7, #86efac);
+}
+
+html[data-theme="football"] .hero-child-streak {
+  background: linear-gradient(180deg, #bbf7d0, #4ade80);
+}
+
+html[data-theme="car"] .hero-child-coins {
+  background: linear-gradient(180deg, #fee2e2, #f87171);
+}
+
+html[data-theme="car"] .hero-child-streak {
+  background: linear-gradient(180deg, #e2e8f0, #94a3b8);
+}
+
+html[data-theme="blue"] .hero-child-coins {
+  background: linear-gradient(180deg, #dbeafe, #60a5fa);
+}
+
+html[data-theme="blue"] .hero-child-streak {
+  background: linear-gradient(180deg, #bfdbfe, #3b82f6);
+  color: white;
+}
+
+html[data-theme="flower"] .hero-child-coins {
+  background: linear-gradient(180deg, #ffe4e6, #fda4af);
+}
+
+html[data-theme="flower"] .hero-child-streak {
+  background: linear-gradient(180deg, #dcfce7, #86efac);
 }

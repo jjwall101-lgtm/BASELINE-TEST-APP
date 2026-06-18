@@ -607,7 +607,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setTheme(theme) {
-    const allowed = ["plain", "mario", "space", "minecraft", "bunny"];
+    const allowed = ["plain", "mario", "space", "minecraft", "bunny", "princess", "football", "car", "blue", "flower"];
     const safeTheme = allowed.includes(theme) ? theme : "plain";
     document.documentElement.dataset.theme = safeTheme;
     localStorage.setItem(THEME_KEY, safeTheme);
@@ -681,6 +681,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (theme === "minecraft") return { icon: "💎", name: "DIAMOND PRIZE", subtitle: "Build complete!" };
     if (theme === "bunny") return { icon: "🐰", name: "BUNNY BADGE", subtitle: "Hop, hop, hooray!" };
     if (theme === "mario") return { icon: "🌟", name: "SUPER STAR PRIZE", subtitle: "Goal reached!" };
+    if (theme === "princess") return { icon: "👑", name: "PRINCESS PRIZE", subtitle: "Royal job!" };
+    if (theme === "football") return { icon: "⚽", name: "MATCH WIN", subtitle: "Top scorer!" };
+    if (theme === "car") return { icon: "🏁", name: "RACE WINNER", subtitle: "Zoom to the goal!" };
+    if (theme === "blue") return { icon: "💙", name: "BLUE RIBBON", subtitle: "Amazing work!" };
+    if (theme === "flower") return { icon: "🌸", name: "FLOWER PRIZE", subtitle: "Blooming brilliant!" };
     return { icon: "🏆", name: "GOAL REACHED", subtitle: "Goal reached!" };
   }
 
@@ -2262,6 +2267,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (theme === "minecraft") return "⛏️";
     if (theme === "bunny") return "🐰";
     if (theme === "mario") return "🍄";
+    if (theme === "princess") return "👑";
+    if (theme === "football") return "⚽";
+    if (theme === "car") return "🚗";
+    if (theme === "blue") return "💙";
+    if (theme === "flower") return "🌸";
     return "⏱️";
   }
 
@@ -2647,7 +2657,12 @@ document.addEventListener("DOMContentLoaded", () => {
       mario: "#f97316",
       space: "#10103e",
       minecraft: "#3f7f32",
-      bunny: "#ec4899"
+      bunny: "#ec4899",
+      princess: "#f472b6",
+      football: "#16a34a",
+      car: "#ef4444",
+      blue: "#2563eb",
+      flower: "#fb7185"
     };
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themeColours[getCurrentTheme()] || themeColours.plain);
   }
@@ -2658,7 +2673,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const theme = getCurrentTheme();
-    elements.progressCharacter.textContent = theme === "space" ? "🚀" : theme === "minecraft" ? "⛏️" : theme === "bunny" ? "🐰" : theme === "mario" ? "🍄" : "⭐";
+    elements.progressCharacter.textContent = theme === "space" ? "🚀" : theme === "minecraft" ? "⛏️" : theme === "bunny" ? "🐰" : theme === "mario" ? "🍄" : theme === "princess" ? "👑" : theme === "football" ? "⚽" : theme === "car" ? "🚗" : theme === "blue" ? "💙" : theme === "flower" ? "🌸" : "⭐";
   }
 
   function updateCoinDisplay() {
@@ -3169,7 +3184,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-3");
+      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-4");
       await navigator.serviceWorker.ready;
       return serviceWorkerRegistration;
     } catch (error) {
