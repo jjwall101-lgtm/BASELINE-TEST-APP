@@ -3301,8 +3301,7 @@ body.child-mode .timer-custom {
   gap: 10px;
 }
 
-.profile-photo-preview,
-.profile-photo-placeholder {
+.profile-photo-preview {
   width: min(72vw, 280px);
   height: min(72vw, 280px);
   max-width: 280px;
@@ -3310,18 +3309,19 @@ body.child-mode .timer-custom {
   border-radius: 50%;
   border: 6px solid var(--outline);
   box-shadow: 5px 5px 0 var(--outline);
-}
-
-.profile-photo-preview {
   object-fit: cover;
   background: white;
+  display: block;
+}
+
+.profile-photo-preview.is-placeholder {
+  background: linear-gradient(180deg, #e9f3ff, #d7eaff);
+  padding: 18%;
+  object-fit: contain;
 }
 
 .profile-photo-placeholder {
-  display: grid;
-  place-items: center;
-  background: linear-gradient(180deg, #e9f3ff, #d7eaff);
-  font-size: 56px;
+  display: none !important;
 }
 
 .profile-photo-card p {

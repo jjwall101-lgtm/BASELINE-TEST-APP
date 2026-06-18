@@ -2540,20 +2540,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  function getDefaultProfilePhotoSvg() {
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <rect width="300" height="300" rx="150" fill="#dbeafe"/>
+        <circle cx="150" cy="120" r="42" fill="#6b7280"/>
+        <path d="M84 236c12-44 43-70 66-70s54 26 66 70" fill="#6b7280"/>
+      </svg>`;
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+  }
+
   function updateProfilePhotoDisplay() {
     const photo = localStorage.getItem(PROFILE_PHOTO_KEY) || "";
 
     if (elements.profilePhotoPreview) {
-      elements.profilePhotoPreview.hidden = !photo;
-      if (photo) {
-        elements.profilePhotoPreview.src = photo;
-      } else {
-        elements.profilePhotoPreview.removeAttribute("src");
-      }
-    }
-
-    if (elements.profilePhotoPlaceholder) {
-      elements.profilePhotoPlaceholder.hidden = Boolean(photo);
+      elements.profilePhotoPreview.hidden = false;
+      elements.profilePhotoPreview.src = photo || getDefaultProfilePhotoSvg();
+      elements.profilePhotoPreview.classList.toggle("is-placeholder", !photo);
     }
   }
 
@@ -3166,7 +3169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-1");
+      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-3");
       await navigator.serviceWorker.ready;
       return serviceWorkerRegistration;
     } catch (error) {
