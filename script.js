@@ -606,6 +606,35 @@ document.addEventListener("DOMContentLoaded", () => {
     return localStorage.getItem(THEME_KEY) || "plain";
   }
 
+  function getThemeGraphicSvg(theme = getCurrentTheme()) {
+    const svgs = {
+      plain: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#2563eb" stroke="#1f1f1f" stroke-width="4"/><polygon points="32,15 36.8,26 49,27.2 39.8,35.2 42.8,47 32,40.4 21.2,47 24.2,35.2 15,27.2 27.2,26" fill="#f8fafc" stroke="#1f1f1f" stroke-width="2" stroke-linejoin="round"/></svg>`,
+      mario: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 32c0-10 8-17 18-17s18 7 18 17H14Z" fill="#ef4444" stroke="#1f1f1f" stroke-width="4"/><path d="M20 31h24v8c0 7-5 12-12 12s-12-5-12-12v-8Z" fill="#fde68a" stroke="#1f1f1f" stroke-width="4"/><circle cx="26" cy="28" r="3" fill="#fff"/><circle cx="38" cy="24" r="3" fill="#fff"/></svg>`,
+      space: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g transform="translate(32 32) rotate(25) translate(-32 -32)"><path d="M32 10c8 6 10 15 10 23 0 10-5 18-10 21-5-3-10-11-10-21 0-8 2-17 10-23Z" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4"/><circle cx="32" cy="28" r="5" fill="#dbeafe" stroke="#1f1f1f" stroke-width="3"/><path d="M23 38 16 44 20 33Z" fill="#f97316" stroke="#1f1f1f" stroke-width="3"/><path d="M41 38 48 44 44 33Z" fill="#f97316" stroke="#1f1f1f" stroke-width="3"/><path d="M28 48h8l-4 8Z" fill="#facc15" stroke="#1f1f1f" stroke-width="3"/></g></svg>`,
+      minecraft: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="16" width="44" height="32" rx="2" fill="#8b5a3c" stroke="#1f1f1f" stroke-width="4"/><rect x="10" y="16" width="44" height="12" rx="2" fill="#55bf4b" stroke="#1f1f1f" stroke-width="4"/><rect x="20" y="30" width="8" height="8" fill="#5cae40"/><rect x="28" y="26" width="8" height="8" fill="#6a4a32"/><rect x="36" y="32" width="8" height="8" fill="#5cae40"/></svg>`,
+      bunny: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="18" y="6" width="10" height="24" rx="5" fill="#fff" stroke="#1f1f1f" stroke-width="3"/><rect x="36" y="6" width="10" height="24" rx="5" fill="#fff" stroke="#1f1f1f" stroke-width="3"/><rect x="21" y="10" width="4" height="16" rx="2" fill="#f9a8d4"/><rect x="39" y="10" width="4" height="16" rx="2" fill="#f9a8d4"/><circle cx="32" cy="38" r="16" fill="#fff" stroke="#1f1f1f" stroke-width="4"/><circle cx="26" cy="36" r="2.4" fill="#1f1f1f"/><circle cx="38" cy="36" r="2.4" fill="#1f1f1f"/><path d="M28 44c2 2 6 2 8 0" fill="none" stroke="#1f1f1f" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="40" r="2.5" fill="#fda4af"/></svg>`,
+      princess: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 22 22 34 32 18 42 34 50 22l4 24H10l4-24Z" fill="#f472b6" stroke="#1f1f1f" stroke-width="4" stroke-linejoin="round"/><circle cx="22" cy="22" r="3" fill="#fde68a" stroke="#1f1f1f" stroke-width="2"/><circle cx="32" cy="16" r="3" fill="#93c5fd" stroke="#1f1f1f" stroke-width="2"/><circle cx="42" cy="22" r="3" fill="#c4b5fd" stroke="#1f1f1f" stroke-width="2"/><rect x="16" y="42" width="32" height="8" rx="3" fill="#fbcfe8" stroke="#1f1f1f" stroke-width="3"/></svg>`,
+      football: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="22" fill="#fff" stroke="#1f1f1f" stroke-width="4"/><polygon points="32,21 38,25 36,32 28,32 26,25" fill="#1f1f1f"/><path d="M32 10 40 15 50 18 54 30 50 42 40 49 32 54 24 49 14 42 10 30 14 18 24 15Z" fill="none" stroke="#1f1f1f" stroke-width="2" opacity=".55"/></svg>`,
+      car: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M14 38h36l-4-10c-1-3-3-5-7-5H28c-4 0-6 2-8 5l-6 10Z" fill="#ef4444" stroke="#1f1f1f" stroke-width="4" stroke-linejoin="round"/><rect x="16" y="38" width="34" height="10" rx="4" fill="#f87171" stroke="#1f1f1f" stroke-width="4"/><path d="M26 24h10c3 0 5 1 6 4l2 5H22l2-5c1-3 3-4 6-4Z" fill="#dbeafe" stroke="#1f1f1f" stroke-width="3"/><circle cx="22" cy="50" r="6" fill="#1f2937"/><circle cx="44" cy="50" r="6" fill="#1f2937"/><circle cx="22" cy="50" r="2.5" fill="#e5e7eb"/><circle cx="44" cy="50" r="2.5" fill="#e5e7eb"/></svg>`,
+      blue: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 10 48 22v18L32 54 16 40V22l16-12Z" fill="#60a5fa" stroke="#1f1f1f" stroke-width="4" stroke-linejoin="round"/><path d="M32 17 42 24v12l-10 7-10-7V24l10-7Z" fill="#dbeafe" opacity=".85"/><path d="M21 25h22" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".8"/></svg>`,
+      flower: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="7" fill="#facc15" stroke="#1f1f1f" stroke-width="3"/><circle cx="32" cy="18" r="8" fill="#fb7185" stroke="#1f1f1f" stroke-width="3"/><circle cx="46" cy="32" r="8" fill="#f9a8d4" stroke="#1f1f1f" stroke-width="3"/><circle cx="32" cy="46" r="8" fill="#fb7185" stroke="#1f1f1f" stroke-width="3"/><circle cx="18" cy="32" r="8" fill="#f9a8d4" stroke="#1f1f1f" stroke-width="3"/><path d="M32 39v14" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/></svg>`
+    };
+    return svgs[theme] || svgs.plain;
+  }
+
+  function renderThemeGraphicElement(element, theme = getCurrentTheme(), className = "") {
+    if (!element) return;
+    element.innerHTML = `<span class="theme-svg-wrap ${className}">${getThemeGraphicSvg(theme)}</span>`;
+  }
+
+  function renderThemeDecorations() {
+    renderThemeGraphicElement(document.querySelector('.princess-art'), 'princess');
+    renderThemeGraphicElement(document.querySelector('.football-art'), 'football');
+    renderThemeGraphicElement(document.querySelector('.car-theme-art'), 'car');
+    renderThemeGraphicElement(document.querySelector('.blue-theme-art'), 'blue');
+    renderThemeGraphicElement(document.querySelector('.flower-theme-art'), 'flower');
+  }
+
   function setTheme(theme) {
     const allowed = ["plain", "mario", "space", "minecraft", "bunny", "princess", "football", "car", "blue", "flower"];
     const safeTheme = allowed.includes(theme) ? theme : "plain";
@@ -619,6 +648,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgressCharacter();
     updatePrizeDetails();
     updateTimerDisplay();
+    renderThemeDecorations();
   }
 
   function applyDailyReset(data) {
@@ -2314,7 +2344,7 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.timerRing.style.background = `conic-gradient(var(--theme-accent) 0 ${leftPercent}%, rgba(255,255,255,0.72) ${leftPercent}% 100%)`;
 
     if (elements.timerCharacter) {
-      elements.timerCharacter.textContent = getTimerCharacter();
+      renderThemeGraphicElement(elements.timerCharacter, getCurrentTheme(), "timer-svg");
     }
 
     if (elements.timerStatus) {
@@ -2673,7 +2703,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const theme = getCurrentTheme();
-    elements.progressCharacter.textContent = theme === "space" ? "🚀" : theme === "minecraft" ? "⛏️" : theme === "bunny" ? "🐰" : theme === "mario" ? "🍄" : theme === "princess" ? "👑" : theme === "football" ? "⚽" : theme === "car" ? "🚗" : theme === "blue" ? "💙" : theme === "flower" ? "🌸" : "⭐";
+    renderThemeGraphicElement(elements.progressCharacter, theme, "journey-svg");
   }
 
   function updateCoinDisplay() {
@@ -3160,8 +3190,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const details = getPrizeDetails(currentData.celebration.theme || getCurrentTheme());
-    elements.prizeDropIcon.textContent = details.icon;
+    const theme = currentData.celebration.theme || getCurrentTheme();
+    const details = getPrizeDetails(theme);
+    renderThemeGraphicElement(elements.prizeDropIcon, theme, "prize-svg");
     elements.prizeDropName.textContent = details.name;
     elements.treatSubtitle.textContent = details.subtitle;
   }
@@ -3184,7 +3215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-5");
+      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-6");
       await navigator.serviceWorker.ready;
       return serviceWorkerRegistration;
     } catch (error) {

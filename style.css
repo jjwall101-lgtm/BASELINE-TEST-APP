@@ -4292,3 +4292,66 @@ html[data-theme="plain"] .hero-bg-two {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* CUSTOM GRAPHICS V6 */
+.theme-svg-wrap {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+}
+
+.theme-svg-wrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 3px 0 rgba(31,31,31,0.18));
+}
+
+.theme-emoji-art {
+  width: 44px;
+  height: 44px;
+  padding: 5px;
+  font-size: 0;
+}
+
+.journey-character {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 0;
+}
+
+.journey-character .theme-svg-wrap {
+  width: 42px;
+  height: 42px;
+}
+
+.timer-character {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  font-size: 0;
+}
+
+.timer-character .theme-svg-wrap {
+  width: 70px;
+  height: 70px;
+}
+
+.prize-drop-icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 10px;
+  display: grid;
+  place-items: center;
+  font-size: 0;
+}
+
+.prize-drop-icon .theme-svg-wrap {
+  width: 84px;
+  height: 84px;
+}

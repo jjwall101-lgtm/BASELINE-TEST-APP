@@ -6,7 +6,7 @@
 
   <title>Together Steps</title>
 
-  <link rel="stylesheet" href="style.css?v=ts-layout-5" />
+  <link rel="stylesheet" href="style.css?v=ts-layout-6" />
   <link rel="manifest" href="manifest.json" />
 
   <link rel="icon" href="icon.png" />
@@ -100,11 +100,11 @@
           <div class="carrot-art"></div>
           <div class="heart-art">♥</div>
 
-          <div class="theme-emoji-art princess-art">👑</div>
-          <div class="theme-emoji-art football-art">⚽</div>
-          <div class="theme-emoji-art car-theme-art">🚗</div>
-          <div class="theme-emoji-art blue-theme-art">💙</div>
-          <div class="theme-emoji-art flower-theme-art">🌸</div>
+          <div class="theme-emoji-art princess-art" aria-hidden="true"></div>
+          <div class="theme-emoji-art football-art" aria-hidden="true"></div>
+          <div class="theme-emoji-art car-theme-art" aria-hidden="true"></div>
+          <div class="theme-emoji-art blue-theme-art" aria-hidden="true"></div>
+          <div class="theme-emoji-art flower-theme-art" aria-hidden="true"></div>
         </div>
       </section>
     </header>
@@ -152,7 +152,7 @@
         <div class="journey-wrap" aria-label="Journey to goal coins">
           <div class="journey-track">
             <span class="journey-start">0</span>
-            <span class="journey-character" id="progressCharacter">🍄</span>
+            <span class="journey-character" id="progressCharacter" aria-hidden="true"></span>
             <span class="finish-line">
               <span class="finish-flag">🏁</span>
               <span class="finish-text" id="finishGoal">1000</span>
@@ -237,7 +237,7 @@
       <section class="treat-card" id="treatCard">
         <div class="section-title">PRIZE REACHED</div>
         <div class="prize-drop" id="prizeDrop">
-          <div class="prize-drop-icon" id="prizeDropIcon">🌟</div>
+          <div class="prize-drop-icon" id="prizeDropIcon" aria-hidden="true"></div>
           <div class="prize-drop-name" id="prizeDropName">SUPER STAR PRIZE</div>
         </div>
         <p class="treat-subtitle" id="treatSubtitle">Goal reached!</p>
@@ -482,7 +482,7 @@
 
         <div class="timer-stage" aria-live="polite">
           <div class="timer-ring" id="timerRing">
-            <span class="timer-character" id="timerCharacter">🍄</span>
+            <span class="timer-character" id="timerCharacter" aria-hidden="true"></span>
             <strong id="timerTime">05:00</strong>
             <small>left</small>
           </div>
@@ -667,6 +667,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=ts-layout-5" type="module"></script>
+  <script src="script.js?v=ts-layout-6" type="module"></script>
 </body>
 </html>
