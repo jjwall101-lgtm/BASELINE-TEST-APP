@@ -37,3 +37,15 @@ This test build uses the uploaded child-app layout and feature set.
 - Cross-device syncing
 
 Saved data stays on the device/browser used for testing. Clearing browser/app data can delete the saved test data.
+
+
+## Full upgrade package
+
+This build includes:
+- Together Steps logo in the app header instead of plain text
+- Updated app icon and branding files
+- Custom graphics across the app instead of emoji-based UI icons
+- Bigger emotive feeling icons
+- New Calm Tools page
+- Child-accessible theme picker
+- Local-only saving with no Firebase sync

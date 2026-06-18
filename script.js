@@ -260,6 +260,12 @@ document.addEventListener("DOMContentLoaded", () => {
     timerCharacter: $("timerCharacter"),
     timerTime: $("timerTime"),
     timerStatus: $("timerStatus"),
+    startBreathingButton: $("startBreathingButton"),
+    stopBreathingButton: $("stopBreathingButton"),
+    breathingOrb: $("breathingOrb"),
+    breathingText: $("breathingText"),
+    breathingHelper: $("breathingHelper"),
+    toolMessage: $("toolMessage"),
     startTimerButton: $("startTimerButton"),
     pauseTimerButton: $("pauseTimerButton"),
     resetTimerButton: $("resetTimerButton"),
@@ -2788,7 +2794,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (childMode) {
       const activePage = document.querySelector(".page.active");
-      if (activePage && !["page-home", "page-feelings", "page-rewards", "page-calendar", "page-timer", "page-family"].includes(activePage.id)) {
+      if (activePage && !["page-home", "page-feelings", "page-rewards", "page-calendar", "page-timer", "page-tools", "page-family"].includes(activePage.id)) {
         switchPage("home");
       }
     }
@@ -3483,7 +3489,83 @@ document.addEventListener("DOMContentLoaded", () => {
     setSyncStatus("Saved on this device", "offline");
   }
 
+
+  let breathingInterval = null;
+  let breathingStep = 0;
+
+  function updateBreathingStep() {
+    const steps = [
+      { text: "Breathe in", helper: "Slowly breathe in through your nose." },
+      { text: "Hold", helper: "Hold it gently." },
+      { text: "Breathe out", helper: "Slowly breathe out." },
+      { text: "Rest", helper: "Rest for a moment." }
+    ];
+
+    const step = steps[breathingStep % steps.length];
+
+    if (elements.breathingText) {
+      elements.breathingText.textContent = step.text;
+    }
+
+    if (elements.breathingHelper) {
+      elements.breathingHelper.textContent = step.helper;
+    }
+
+    breathingStep += 1;
+  }
+
+  function startBreathingTool() {
+    stopBreathingTool(false);
+    breathingStep = 0;
+
+    if (elements.breathingOrb) {
+      elements.breathingOrb.classList.add("running");
+    }
+
+    updateBreathingStep();
+    breathingInterval = window.setInterval(updateBreathingStep, 3000);
+  }
+
+  function stopBreathingTool(resetText = true) {
+    if (breathingInterval) {
+      window.clearInterval(breathingInterval);
+      breathingInterval = null;
+    }
+
+    if (elements.breathingOrb) {
+      elements.breathingOrb.classList.remove("running");
+    }
+
+    if (resetText && elements.breathingText) {
+      elements.breathingText.textContent = "Breathe";
+    }
+
+    if (resetText && elements.breathingHelper) {
+      elements.breathingHelper.textContent = "Tap start and follow the bubble.";
+    }
+  }
+
+  function setupCalmTools() {
+    if (elements.startBreathingButton) {
+      elements.startBreathingButton.addEventListener("click", startBreathingTool);
+    }
+
+    if (elements.stopBreathingButton) {
+      elements.stopBreathingButton.addEventListener("click", () => stopBreathingTool(true));
+    }
+
+    document.querySelectorAll(".tool-card[data-tool-message]").forEach(button => {
+      button.addEventListener("click", () => {
+        if (elements.toolMessage) {
+          elements.toolMessage.textContent = button.dataset.toolMessage || "Choose a calm tool.";
+        }
+      });
+    });
+  }
+
+
   function connectEvents() {
+    setupCalmTools();
     document.querySelectorAll(".nav-button").forEach(button => {
       button.addEventListener("click", () => switchPage(button.dataset.page));
     });

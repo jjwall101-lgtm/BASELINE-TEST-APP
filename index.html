@@ -6,7 +6,7 @@
 
   <title>Together Steps</title>
 
-  <link rel="stylesheet" href="style.css?v=ts-layout-7" />
+  <link rel="stylesheet" href="style.css?v=ts-full-upgrade-1" />
   <link rel="manifest" href="manifest.json" />
 
   <link rel="icon" href="icon.png" />
@@ -27,7 +27,7 @@
           <button type="button" class="small-parent-button" id="headerUnlockButton">Parent Mode</button>
         </div>
 
-        <h1>Together Steps</h1>
+        <img class="app-wordmark-logo" src="together-steps-logo.png" alt="Together Steps" />
 
         <p class="mode-status-pill" id="modeStatusPill">Child Mode</p>
 
@@ -49,7 +49,7 @@
         </section>
 
         <section class="theme-switcher" aria-label="Theme selector">
-          <label for="themeSelect">Theme</label>
+          <label for="themeSelect">Pick a theme</label>
           <select id="themeSelect">
             <option value="plain">Plain</option>
             <option value="mario">Retro</option>
@@ -118,6 +118,7 @@
       <button type="button" class="nav-button" data-page="reports">Reports</button>
       <button type="button" class="nav-button" data-page="calendar">Calendar</button>
       <button type="button" class="nav-button" data-page="timer">Timer</button>
+      <button type="button" class="nav-button" data-page="tools">Tools</button>
       <button type="button" class="nav-button" data-page="family">Family</button>
       <button type="button" class="nav-button" data-page="settings">Settings</button>
     </nav>
@@ -636,6 +637,53 @@
       </section>
     </section>
 
+
+      <section class="page" id="page-tools">
+        <section class="tools-card">
+          <div class="section-title">CALM TOOLS</div>
+          <p class="tools-subtitle">Little tools to help slow down, choose what helps, and feel ready again.</p>
+
+          <div class="tool-breathing-card">
+            <div class="breathing-orb" id="breathingOrb">
+              <span id="breathingText">Breathe</span>
+            </div>
+            <p class="breathing-helper" id="breathingHelper">Tap start and follow the bubble.</p>
+            <div class="tool-buttons">
+              <button type="button" id="startBreathingButton">Start calm breathing</button>
+              <button type="button" id="stopBreathingButton">Stop</button>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <button type="button" class="tool-card" data-tool-message="Ask for a hug, a quiet space, or help with words.">
+              <span class="tool-graphic tool-help"></span>
+              <strong>I need help</strong>
+              <small>Show a grown-up</small>
+            </button>
+
+            <button type="button" class="tool-card" data-tool-message="Try headphones, a quiet room, dim lights, or a soft toy.">
+              <span class="tool-graphic tool-sensory"></span>
+              <strong>Sensory break</strong>
+              <small>Make things calmer</small>
+            </button>
+
+            <button type="button" class="tool-card" data-tool-message="First: one small job. Then: a reward or rest.">
+              <span class="tool-graphic tool-first-then"></span>
+              <strong>First / Then</strong>
+              <small>Break it down</small>
+            </button>
+
+            <button type="button" class="tool-card" data-tool-message="Name 5 things you see, 4 things you feel, 3 things you hear, 2 things you smell, and 1 good thing.">
+              <span class="tool-graphic tool-grounding"></span>
+              <strong>5-4-3-2-1</strong>
+              <small>Grounding game</small>
+            </button>
+          </div>
+
+          <div class="tool-message" id="toolMessage">Choose a calm tool.</div>
+        </section>
+      </section>
+
     <footer class="ground" aria-hidden="true">
       <div class="grass"></div>
       <div class="dirt"></div>
@@ -688,6 +736,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=ts-layout-7" type="module"></script>
+  <script src="script.js?v=ts-full-upgrade-1" type="module"></script>
 </body>
 </html>
