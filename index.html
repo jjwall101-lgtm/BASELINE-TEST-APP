@@ -6,7 +6,7 @@
 
   <title>Together Steps</title>
 
-  <link rel="stylesheet" href="style.css?v=themes-v1" />
+  <link rel="stylesheet" href="style.css?v=ts-layout-1" />
   <link rel="manifest" href="manifest.json" />
 
   <link rel="icon" href="icon.png" />
@@ -23,23 +23,23 @@
 
       <section class="profile-card">
         <div class="profile-top-row">
-          <div class="sync-pill" id="syncStatus">Local save ready</div>
+          <div class="sync-pill" id="syncStatus">Saved on this device</div>
           <button type="button" class="small-parent-button" id="headerUnlockButton">Parent Mode</button>
         </div>
 
-        <img class="app-icon-preview" src="icon.png" alt="Together Steps logo" />
+        <img class="app-icon-preview" src="icon.png" alt="Together Steps app logo" />
 
         <h1>Together Steps</h1>
 
+        <p class="mode-status-pill" id="modeStatusPill">Child Mode</p>
+
         <section class="profile-photo-card" aria-label="Profile photo">
-          <img id="profilePhotoPreview" class="profile-photo-preview" alt="Profile photo" hidden />
-          <div id="profilePhotoPlaceholder" class="profile-photo-placeholder" aria-hidden="true">👤</div>
+          <img class="profile-photo-preview" id="profilePhotoPreview" alt="Profile photo" hidden />
+          <div class="profile-photo-placeholder" id="profilePhotoPlaceholder" aria-hidden="true">👤</div>
           <p>Profile photo</p>
         </section>
 
-        <p class="mode-status-pill" id="modeStatusPill">Child Mode</p>
-
-        <section class="hero-child-stats child-mode-only" aria-label="Child coin bank and streak">
+        <section class="hero-child-stats child-mode-only" aria-label="Coin bank and streak">
           <div class="hero-child-stat hero-child-coins">
             <span id="childCoinTotal">0</span>
             <small>coins</small>
@@ -51,7 +51,53 @@
           </div>
         </section>
 
-        <div class="plain-header-line" aria-hidden="true"></div>
+        <section class="theme-switcher" aria-label="Theme selector">
+          <label for="themeSelect">Theme</label>
+          <select id="themeSelect">
+            <option value="plain">Plain</option>
+            <option value="mario">Retro</option>
+            <option value="space">Space</option>
+            <option value="minecraft">Minecraft-style</option>
+            <option value="bunny">Bunny</option>
+          </select>
+        </section>
+
+        <div class="power-row" aria-hidden="true">
+          <div class="question-block">?</div>
+          <div class="coin-art"></div>
+          <div class="brick-block"></div>
+
+          <div class="rocket-art">
+            <div class="rocket-window"></div>
+            <div class="rocket-fin left"></div>
+            <div class="rocket-fin right"></div>
+            <div class="rocket-flame"></div>
+          </div>
+
+          <div class="mushroom-art">
+            <div class="mushroom-cap"></div>
+            <div class="mushroom-face"></div>
+          </div>
+
+          <div class="astronaut-helmet">
+            <div class="helmet-visor"></div>
+          </div>
+
+          <div class="minecraft-character">
+            <div class="mc-head"></div>
+            <div class="mc-body"></div>
+          </div>
+
+          <div class="minecraft-block grass-block"></div>
+
+          <div class="bunny-art">
+            <div class="bunny-ear left"></div>
+            <div class="bunny-ear right"></div>
+            <div class="bunny-face"></div>
+          </div>
+          <div class="carrot-art"></div>
+          <div class="heart-art">♥</div>
+        </div>
       </section>
     </header>
 
@@ -76,7 +122,7 @@
 
       <div class="child-status-row child-status-row-single">
         <div>
-          <strong id="childTodayLevel">Okay</strong>
+          <strong id="childTodayLevel">AMBER</strong>
           <span>Today</span>
         </div>
       </div>
@@ -98,7 +144,7 @@
         <div class="journey-wrap" aria-label="Journey to goal coins">
           <div class="journey-track">
             <span class="journey-start">0</span>
-            <span class="journey-character" id="progressCharacter">●</span>
+            <span class="journey-character" id="progressCharacter">🍄</span>
             <span class="finish-line">
               <span class="finish-flag">🏁</span>
               <span class="finish-text" id="finishGoal">1000</span>
@@ -131,14 +177,14 @@
           <span id="streakCount">0</span>
           <span>day streak</span>
         </div>
-        <p class="streak-message" id="streakMessage">Reach Amazing today to start a streak.</p>
+        <p class="streak-message" id="streakMessage">Reach green today to start a streak.</p>
         <div class="streak-best">Best streak: <span id="bestStreak">0</span></div>
       </section>
 
       <section class="behaviour-card">
         <div class="section-title">TODAY'S LEVEL</div>
 
-        <div class="today-level-pill" id="todayLevelPill">Okay</div>
+        <div class="today-level-pill" id="todayLevelPill">AMBER</div>
 
         <label for="behaviourCategorySelect">Reason/category</label>
         <select id="behaviourCategorySelect"></select>
@@ -147,37 +193,37 @@
         <textarea id="behaviourReasonText" rows="3" placeholder="Optional note for this change..."></textarea>
 
         <section class="traffic-light" aria-label="Behaviour traffic light">
-          <button type="button" class="light red" id="redLight" aria-label="Bad day level">
+          <button type="button" class="light red" id="redLight" aria-label="Red level">
             <span>!</span>
           </button>
 
-          <button type="button" class="light amber active" id="amberLight" aria-label="Okay level">
+          <button type="button" class="light amber active" id="amberLight" aria-label="Amber level">
             <span>?</span>
           </button>
 
-          <button type="button" class="light green" id="greenLight" aria-label="Amazing level">
+          <button type="button" class="light green" id="greenLight" aria-label="Green level">
             <span>★</span>
           </button>
         </section>
 
         <div class="level-labels">
           <button type="button" class="level-card red-card" id="redLabel">
-            <strong>Bad day</strong>
+            <strong>RED</strong>
             <span id="redCoinValue">-50 coins</span>
           </button>
 
           <button type="button" class="level-card amber-card" id="amberLabel">
-            <strong>Okay</strong>
-            <span>Steady day</span>
+            <strong>AMBER</strong>
+            <span>Trying level</span>
           </button>
 
           <button type="button" class="level-card green-card" id="greenLabel">
-            <strong>Amazing</strong>
+            <strong>GREEN</strong>
             <span id="greenCoinValue">+50 coins</span>
           </button>
         </div>
 
-        <button type="button" class="reset-button" id="resetTodayButton">Reset today to Okay</button>
+        <button type="button" class="reset-button" id="resetTodayButton">Reset today to amber</button>
       </section>
 
       <section class="treat-card" id="treatCard">
@@ -249,9 +295,9 @@
 
             <label for="quickLogLevelSelect">Today’s level</label>
             <select id="quickLogLevelSelect">
-              <option value="green">Amazing</option>
-              <option value="amber">Okay</option>
-              <option value="red">Bad day</option>
+              <option value="green">Green</option>
+              <option value="amber">Amber</option>
+              <option value="red">Red</option>
             </select>
 
             <label for="quickLogCategorySelect">Category</label>
@@ -268,7 +314,7 @@
 
             <div class="note-form">
               <label for="noteAuthor">Who wrote the note?</label>
-              <input type="text" id="noteAuthor" placeholder="Parent A / Parent B / Carer / School" maxlength="40" />
+              <input type="text" id="noteAuthor" placeholder="Mum / Dad / Parent / carer" maxlength="40" />
 
               <label for="noteCategorySelect">Category</label>
               <select id="noteCategorySelect"></select>
@@ -372,10 +418,10 @@
     <section class="page" id="page-calendar">
       <section class="calendar-card family-calendar-card">
         <div class="section-title">CHILD'S CALENDAR</div>
-        <p class="calendar-subtitle">Tap a day to see who the child is with.</p>
+        <p class="calendar-subtitle">Tap a day to see the plan.</p>
 
         <div class="family-today-card" id="familyTodayCard">
-          Tap a day to see the child's plan...
+          Tap a day to see the plan...
         </div>
 
         <div class="calendar-grid family-calendar-grid" id="calendarGrid"></div>
@@ -385,14 +431,14 @@
         </div>
 
         <section class="calendar-editor parent-mode-only" id="calendarEditor">
-          <div class="panel-title">Edit Child Calendar</div>
+          <div class="panel-title">Edit Calendar</div>
           <p class="small-copy">Tap a day above, then set who the child is with.</p>
 
           <label for="calendarDateInput">Day</label>
           <input type="date" id="calendarDateInput" />
 
           <label for="calendarWhoInput">Who is the child with?</label>
-          <input type="text" id="calendarWhoInput" placeholder="Parent A / Parent B / Family / School" maxlength="50" />
+          <input type="text" id="calendarWhoInput" placeholder="Mum / Dad / Nan / School" maxlength="50" />
 
           <label for="calendarIconSelect">Icon</label>
           <select id="calendarIconSelect">
@@ -409,7 +455,7 @@
           </select>
 
           <label for="calendarNoteInput">Description for the child</label>
-          <textarea id="calendarNoteInput" rows="3" placeholder="Example: Pick-up after school."></textarea>
+          <textarea id="calendarNoteInput" rows="3" placeholder="Example: Daddy picks up after school."></textarea>
 
           <div class="calendar-editor-buttons">
             <button type="button" id="saveCalendarEntryButton">Save Day</button>
@@ -428,7 +474,7 @@
 
         <div class="timer-stage" aria-live="polite">
           <div class="timer-ring" id="timerRing">
-            <span class="timer-character" id="timerCharacter">⏱️</span>
+            <span class="timer-character" id="timerCharacter">🍄</span>
             <strong id="timerTime">05:00</strong>
             <small>left</small>
           </div>
@@ -464,13 +510,13 @@
     <section class="page" id="page-family">
       <section class="family-tree-card">
         <div class="section-title">MY FAMILY TREE</div>
-        <p class="family-tree-subtitle">A simple picture map of the child's family.</p>
+        <p class="family-tree-subtitle">A simple picture map of the family.</p>
 
         <div class="family-tree-display" id="familyTreeDisplay"></div>
 
         <section class="family-tree-editor parent-mode-only" id="familyTreeEditor">
           <div class="panel-title">Edit Family Tree</div>
-          <p class="small-copy">Add people the child knows. Child Mode shows the family tree only, not the editor.</p>
+          <p class="small-copy">Add family and important people. Child Mode shows the family tree only, not the editor.</p>
 
           <label for="familyRelationshipInput">Relationship</label>
           <input type="text" id="familyRelationshipInput" placeholder="Daddy / Mummy / Nanny / Brother" maxlength="40" />
@@ -492,7 +538,7 @@
           </select>
 
           <label for="familyDescriptionInput">Description for the child</label>
-          <textarea id="familyDescriptionInput" rows="3" placeholder="Example: I stay with Parent A after school."></textarea>
+          <textarea id="familyDescriptionInput" rows="3" placeholder="Example: I am staying with Daddy after school."></textarea>
 
           <button type="button" id="addFamilyMemberButton">Add Family Member</button>
           <button type="button" id="cancelFamilyEditButton" class="cancel-family-edit-button" hidden>Cancel Edit</button>
@@ -512,40 +558,16 @@
         </div>
 
         <div class="settings-unlocked-content" id="settingsUnlockedContent" hidden>
-          <section class="parent-panel profile-photo-settings-panel">
-            <div class="panel-title">Profile Photo</div>
-            <p class="small-copy">Choose a profile photo for this device. It is saved locally and can be changed or removed at any time.</p>
-
-            <label for="profilePhotoInput">Upload profile photo</label>
-            <input type="file" id="profilePhotoInput" accept="image/*" />
-
-            <button type="button" id="removeProfilePhotoButton">Remove Profile Photo</button>
-          </section>
-
-          <section class="parent-panel theme-settings-panel">
-            <div class="panel-title">App Theme</div>
-            <p class="small-copy">Choose the test theme for this device. Theme choice is saved locally.</p>
-
-            <label for="themeSelect">Theme</label>
-            <select id="themeSelect">
-              <option value="plain">Plain</option>
-              <option value="mario">Retro / Mario-style</option>
-              <option value="space">Space</option>
-              <option value="minecraft">Minecraft-style</option>
-              <option value="bunny">Bunny</option>
-            </select>
-          </section>
-
           <section class="parent-panel">
             <div class="panel-title">Coin Settings</div>
 
             <label for="goalInput">Goal coins</label>
             <input type="number" inputmode="numeric" pattern="[0-9]*" id="goalInput" min="50" max="10000" step="10" />
 
-            <label for="greenCoinsInput">Amazing coin value</label>
+            <label for="greenCoinsInput">Green coin value</label>
             <input type="number" inputmode="numeric" pattern="[0-9]*" id="greenCoinsInput" min="0" max="1000" step="5" />
 
-            <label for="redCoinsInput">Bad day coin value</label>
+            <label for="redCoinsInput">Red coin value</label>
             <input type="number" inputmode="numeric" pattern="[0-9]*" id="redCoinsInput" min="0" max="1000" step="5" />
 
             <button type="button" id="saveCoinSettingsButton">Save Coin Settings</button>
@@ -558,6 +580,15 @@
             <input type="password" id="newPinInput" inputmode="numeric" placeholder="New PIN" />
 
             <button type="button" id="changePinButton">Change PIN</button>
+          </section>
+
+
+
+          <section class="parent-panel profile-upload-panel">
+            <div class="panel-title">Profile Photo</div>
+            <p class="small-copy">Choose a photo for the child profile. It is saved only on this device.</p>
+            <input type="file" id="profilePhotoInput" accept="image/*" />
+            <button type="button" id="removeProfilePhotoButton">Remove Profile Photo</button>
           </section>
 
           <section class="parent-panel">
@@ -616,6 +647,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=themes-v1" type="module"></script>
+  <script src="script.js?v=ts-layout-1" type="module"></script>
 </body>
 </html>

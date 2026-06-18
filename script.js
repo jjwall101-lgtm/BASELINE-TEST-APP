@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const DEFAULT_FAMILY_MEMBERS = [
-    { id: "family-child", icon: "🧒", relationship: "Me", name: "Child", branch: "Child", description: "This is me." },
-    { id: "family-parent-a", icon: "👩", relationship: "Parent", name: "Parent A", branch: "Parents", description: "A parent or carer who helps me." },
-    { id: "family-parent-b", icon: "👨", relationship: "Parent", name: "Parent B", branch: "Parents", description: "A parent or carer who helps me." },
+    { id: "family-child", icon: "👧", relationship: "Me", name: "Me", branch: "Child", description: "This is me." },
+    { id: "family-parent-one", icon: "👩", relationship: "Parent", name: "Parent", branch: "Parents", description: "A parent who loves and helps me." },
+    { id: "family-parent-two", icon: "👨", relationship: "Parent", name: "Parent", branch: "Parents", description: "A parent who loves and helps me." },
     { id: "family-sibling", icon: "🧒", relationship: "Sibling", name: "Sibling", branch: "Siblings", description: "My sibling." },
     { id: "family-grandparent", icon: "👵", relationship: "Grandparent", name: "Grandparent", branch: "Other family", description: "My grandparent." }
   ];
@@ -212,13 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     newPinInput: $("newPinInput"),
     changePinButton: $("changePinButton"),
 
-    authEmailInput: $("authEmailInput"),
-    authPasswordInput: $("authPasswordInput"),
-    createAccountButton: $("createAccountButton"),
-    signInButton: $("signInButton"),
-    signOutButton: $("signOutButton"),
-    addThisParentButton: $("addThisParentButton"),
-    authStatus: $("authStatus"),
 
     exportDataButton: $("exportDataButton"),
     clearAllDataButton: $("clearAllDataButton")
@@ -267,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
       streak: {
         current: 0,
         best: 0,
-        lastAmazingDate: ""
+        lastGreenDate: ""
       },
       settings: {
         goal: 1000,
@@ -279,8 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
         active: false,
         id: "",
         theme: "plain"
-      },
-      memberUids: {}
+      }
     };
   }
 
@@ -464,15 +456,14 @@ document.addEventListener("DOMContentLoaded", () => {
       streak: {
         current: Math.max(0, Number(data?.streak?.current) || 0),
         best: Math.max(0, Number(data?.streak?.best) || 0),
-        lastAmazingDate: data?.streak?.lastAmazingDate || ""
+        lastGreenDate: data?.streak?.lastGreenDate || ""
       },
       settings,
       celebration: {
         active: Boolean(data?.celebration?.active),
         id: data?.celebration?.id || "",
         theme: data?.celebration?.theme || getCurrentTheme()
-      },
-      memberUids: data?.memberUids && typeof data.memberUids === "object" ? data.memberUids : {}
+      }
     };
   }
 
@@ -611,15 +602,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return false;
   }
 
-  const THEME_OPTIONS = ["plain", "mario", "space", "minecraft", "bunny"];
-
   function getCurrentTheme() {
-    const savedTheme = localStorage.getItem(THEME_KEY) || "plain";
-    return THEME_OPTIONS.includes(savedTheme) ? savedTheme : "plain";
+    return localStorage.getItem(THEME_KEY) || "plain";
   }
 
-  function setTheme(theme = getCurrentTheme()) {
-    const safeTheme = THEME_OPTIONS.includes(theme) ? theme : "plain";
+  function setTheme(theme) {
+    const allowed = ["plain", "mario", "space", "minecraft", "bunny"];
+    const safeTheme = allowed.includes(theme) ? theme : "plain";
     document.documentElement.dataset.theme = safeTheme;
     localStorage.setItem(THEME_KEY, safeTheme);
 
@@ -627,7 +616,6 @@ document.addEventListener("DOMContentLoaded", () => {
       elements.themeSelect.value = safeTheme;
     }
 
-    updateThemeText();
     updateProgressCharacter();
     updatePrizeDetails();
     updateTimerDisplay();
@@ -670,12 +658,6 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.syncStatus.className = `sync-pill ${className}`.trim();
   }
 
-  function getLevelLabel(level) {
-    if (level === "green") return "Amazing";
-    if (level === "red") return "Bad day";
-    return "Okay";
-  }
-
   function addHistoryEntry(data, entry) {
     const now = new Date();
     data.history = normalizeHistory(data.history);
@@ -695,22 +677,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getPrizeDetails(theme = getCurrentTheme()) {
-    if (theme === "space") {
-      return { icon: "🪐", name: "SPACE TROPHY", subtitle: "Mission complete!" };
-    }
-
-    if (theme === "minecraft") {
-      return { icon: "💎", name: "DIAMOND PRIZE", subtitle: "Build complete!" };
-    }
-
-    if (theme === "bunny") {
-      return { icon: "🥕", name: "BUNNY BONUS", subtitle: "Hoppy goal reached!" };
-    }
-
-    if (theme === "mario") {
-      return { icon: "🌟", name: "SUPER STAR PRIZE", subtitle: "Goal reached!" };
-    }
-
+    if (theme === "space") return { icon: "🪐", name: "SPACE TROPHY", subtitle: "Mission complete!" };
+    if (theme === "minecraft") return { icon: "💎", name: "DIAMOND PRIZE", subtitle: "Build complete!" };
+    if (theme === "bunny") return { icon: "🐰", name: "BUNNY BADGE", subtitle: "Hop, hop, hooray!" };
+    if (theme === "mario") return { icon: "🌟", name: "SUPER STAR PRIZE", subtitle: "Goal reached!" };
     return { icon: "🏆", name: "GOAL REACHED", subtitle: "Goal reached!" };
   }
 
@@ -733,7 +703,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       showPhoneNotification("Prize reached!", {
-        body: `Child reached ${goal} coins.`,
+        body: `Your child reached ${goal} coins.`,
         tag: "child-prize"
       }).catch(console.error);
     }
@@ -810,14 +780,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (level === "green" && previousLevel === "amber") {
       coinChange = data.settings.greenCoins;
-      text = `Moved to Amazing: +${coinChange} coins`;
+      text = `Moved to GREEN: +${coinChange} coins`;
     } else if (level === "red" && previousLevel !== "red") {
       coinChange = -data.settings.redCoins;
-      text = `Moved to Bad day: -${data.settings.redCoins} coins`;
+      text = `Moved to RED: -${data.settings.redCoins} coins`;
     } else if (level === "amber") {
-      text = "Moved to Okay";
+      text = "Moved to AMBER";
     } else {
-      text = `${getLevelLabel(level)} selected`;
+      text = `Moved to ${level.toUpperCase()}`;
     }
 
     const before = data.coinTotal;
@@ -831,10 +801,10 @@ document.addEventListener("DOMContentLoaded", () => {
       reason
     };
 
-    if (level === "green" && data.streak.lastAmazingDate !== today) {
+    if (level === "green" && data.streak.lastGreenDate !== today) {
       data.streak.current += 1;
       data.streak.best = Math.max(data.streak.best, data.streak.current);
-      data.streak.lastAmazingDate = today;
+      data.streak.lastGreenDate = today;
     }
 
     if (level === "red") {
@@ -971,7 +941,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     await saveData(data);
 
-    await showPhoneNotification("A feeling was shared", {
+    await showPhoneNotification("Feeling shared", {
       body: `Your child feels ${feeling.emoji} ${feeling.label}`,
       tag: `feeling-${feeling.id}-${getDateISO(now)}`
     });
@@ -1216,10 +1186,10 @@ document.addEventListener("DOMContentLoaded", () => {
       reason: note
     };
 
-    if (level === "green" && data.streak.lastAmazingDate !== getDateISO()) {
+    if (level === "green" && data.streak.lastGreenDate !== getDateISO()) {
       data.streak.current += 1;
       data.streak.best = Math.max(data.streak.best, data.streak.current);
-      data.streak.lastAmazingDate = getDateISO();
+      data.streak.lastGreenDate = getDateISO();
     }
 
     if (level === "red") {
@@ -1230,7 +1200,7 @@ document.addEventListener("DOMContentLoaded", () => {
       type: "level",
       level,
       category,
-      text: note ? `Quick daily log: ${getLevelLabel(level)} - ${note}` : `Quick daily log: ${getLevelLabel(level)}`,
+      text: note ? `Quick daily log: ${level.toUpperCase()} - ${note}` : `Quick daily log: ${level.toUpperCase()}`,
       coinChange: actualChange,
       coinsAfter: data.coinTotal
     });
@@ -1266,7 +1236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const next = rewards.find(reward => reward.cost > total) || rewards.find(reward => total >= reward.cost);
 
     elements.childCoinTotal.textContent = total;
-    elements.childTodayLevel.textContent = getLevelLabel(currentData.today.level);
+    elements.childTodayLevel.textContent = currentData.today.level.toUpperCase();
     elements.childStreakCount.textContent = currentData.streak.current;
 
     const latestFeeling = normalizeFeelingLogs(currentData.feelingLogs)[0];
@@ -1347,7 +1317,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function branchSortValue(branch) {
-    const order = ["Child", "Parents", "Siblings", "Family side A", "Family side B", "Special people", "Other family"];
+    const order = ["Child", "Parents", "Siblings", "Parent side", "Special people", "Other family"];
     const index = order.indexOf(branch);
     return index === -1 ? order.length : index;
   }
@@ -1360,16 +1330,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const members = normalizeFamilyTree(currentData.familyTree);
-    const mainChild = members.find(member => member.branch === "Child") || {
-      icon: "🧒",
+    const child = members.find(member => member.branch === "Child") || {
+      icon: "👦",
       relationship: "Me",
-      name: "Child",
+      name: "Me",
       description: "This is me."
     };
 
     const branches = {};
     members
-      .filter(member => member.id !== mainChild.id && member.branch !== "Child")
+      .filter(member => member.id !== child.id && member.branch !== "Child")
       .forEach(member => {
         const branch = member.branch || "Other family";
         branches[branch] = branches[branch] || [];
@@ -1382,11 +1352,11 @@ document.addEventListener("DOMContentLoaded", () => {
     display.innerHTML = `
       <div class="family-tree-root">
         <div class="family-tree-person family-tree-main-person">
-          <div class="family-person-icon">${escapeAttr(mainChild.icon)}</div>
+          <div class="family-person-icon">${escapeAttr(child.icon)}</div>
           <div>
-            <strong>${escapeAttr(mainChild.name)}</strong>
-            <span>${escapeAttr(mainChild.relationship)}</span>
-            <p>${escapeAttr(mainChild.description || "This is me.")}</p>
+            <strong>${escapeAttr(child.name)}</strong>
+            <span>${escapeAttr(child.relationship)}</span>
+            <p>${escapeAttr(child.description || "This is me.")}</p>
           </div>
         </div>
       </div>
@@ -1637,12 +1607,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     [
       ["Coins", currentData.coinTotal],
-      ["Today", getLevelLabel(currentData.today.level)],
+      ["Today", currentData.today.level.toUpperCase()],
       ["Pending rewards", pendingRequests],
       ["Latest feeling", latestFeelingText],
       ["Notes today", notesToday],
-      ["Amazing logs", greenLogs],
-      ["Bad day logs", redLogs]
+      ["Green logs", greenLogs],
+      ["Red logs", redLogs]
     ].forEach(([label, value]) => {
       const card = document.createElement("div");
       card.className = "dashboard-stat";
@@ -1690,7 +1660,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div>
           <strong>${dateTitle}</strong>
           <span>No plan has been added for this day yet.</span>
-          <p class="calendar-selected-description"><b>Description:</b> ${parentUnlocked ? "Use the editor below to add who Child is with and what is happening." : "Nothing has been added for the child to see yet."}</p>
+          <p class="calendar-selected-description"><b>Description:</b> ${parentUnlocked ? "Use the editor below to add who the child is with and what is happening." : "Nothing has been added yet."}</p>
         </div>
       </div>
     `;
@@ -1826,7 +1796,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function saveCalendarEntry() {
-    if (!await verifyParentPin("edit the child calendar")) {
+    if (!await verifyParentPin("edit the calendar")) {
       return;
     }
 
@@ -1841,7 +1811,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!who) {
-      alert("Add who Child is with first.");
+      alert("Add who the child is with first.");
       return;
     }
 
@@ -1863,7 +1833,7 @@ document.addEventListener("DOMContentLoaded", () => {
       type: "calendar",
       level: "calendar",
       category: "Calendar",
-      text: `Calendar updated: ${dateISO} - Child is with ${who}`,
+      text: `Calendar updated: ${dateISO} - child is with ${who}`,
       coinChange: 0,
       coinsAfter: data.coinTotal
     });
@@ -2232,7 +2202,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `child-parent-app-export-${getDateISO()}.json`;
+    link.download = `together-steps-export-${getDateISO()}.json`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -2569,6 +2539,61 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+  function updateProfilePhotoDisplay() {
+    const photo = localStorage.getItem(PROFILE_PHOTO_KEY) || "";
+
+    if (elements.profilePhotoPreview) {
+      elements.profilePhotoPreview.hidden = !photo;
+      if (photo) {
+        elements.profilePhotoPreview.src = photo;
+      } else {
+        elements.profilePhotoPreview.removeAttribute("src");
+      }
+    }
+
+    if (elements.profilePhotoPlaceholder) {
+      elements.profilePhotoPlaceholder.hidden = Boolean(photo);
+    }
+  }
+
+  function saveProfilePhotoFromFile(file) {
+    if (!file || !file.type.startsWith("image/")) {
+      alert("Choose an image file.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const size = 420;
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        const scale = Math.max(size / img.width, size / img.height);
+        const width = img.width * scale;
+        const height = img.height * scale;
+        const x = (size - width) / 2;
+        const y = (size - height) / 2;
+        ctx.drawImage(img, x, y, width, height);
+        localStorage.setItem(PROFILE_PHOTO_KEY, canvas.toDataURL("image/jpeg", 0.86));
+        updateProfilePhotoDisplay();
+      };
+      img.src = String(reader.result || "");
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removeProfilePhoto() {
+    localStorage.removeItem(PROFILE_PHOTO_KEY);
+    if (elements.profilePhotoInput) {
+      elements.profilePhotoInput.value = "";
+    }
+    updateProfilePhotoDisplay();
+  }
+
   function updateDisplay() {
     const currentActivePage = document.querySelector(".page.active");
     if (currentActivePage) {
@@ -2586,6 +2611,7 @@ document.addEventListener("DOMContentLoaded", () => {
     storeLocalData(currentData);
 
     updateThemeText();
+    updateProfilePhotoDisplay();
     updateCoinDisplay();
     updateLevelDisplay();
     updateStreakDisplay();
@@ -2608,7 +2634,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCelebration();
     updateParentLockDisplay();
     updateNotificationStatus();
-    updateProfilePhotoDisplay();
     maybeSendLatestNotification(currentData).catch(console.error);
   }
 
@@ -2630,7 +2655,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const theme = getCurrentTheme();
-    elements.progressCharacter.textContent = theme === "space" ? "🚀" : theme === "minecraft" ? "⛏️" : theme === "bunny" ? "🐰" : theme === "mario" ? "🍄" : "●";
+    elements.progressCharacter.textContent = theme === "space" ? "🚀" : theme === "minecraft" ? "⛏️" : theme === "bunny" ? "🐰" : theme === "mario" ? "🍄" : "⭐";
   }
 
   function updateCoinDisplay() {
@@ -2660,7 +2685,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateLevelDisplay() {
     const level = currentData.today.level;
-    const label = getLevelLabel(level);
+    const label = level.toUpperCase();
 
     elements.todayLevelPill.textContent = label;
     elements.todayLevelPill.style.background = level === "red" ? "var(--red)" : level === "green" ? "var(--green)" : "var(--amber)";
@@ -2675,9 +2700,9 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.bestStreak.textContent = currentData.streak.best;
 
     if (currentData.streak.current > 0) {
-      elements.streakMessage.textContent = `Great work. Your child has reached Amazing ${currentData.streak.current} day(s) in a row.`;
+      elements.streakMessage.textContent = `Great work. Your child has reached green ${currentData.streak.current} day(s) in a row.`;
     } else {
-      elements.streakMessage.textContent = "Reach Amazing today to start a streak.";
+      elements.streakMessage.textContent = "Reach green today to start a streak.";
     }
   }
 
@@ -2992,9 +3017,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (elements.reportSummary) {
       elements.reportSummary.innerHTML = "";
       [
-        ["Amazing days", greenDays],
-        ["Bad day logs", redItems],
-        ["Okay logs", amberItems],
+        ["Green days", greenDays],
+        ["Red logs", redItems],
+        ["Amber logs", amberItems],
         ["Coins gained", coinsGained],
         ["Coins lost", coinsLost],
         ["Rewards claimed", rewardsClaimed],
@@ -3009,9 +3034,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     drawChart(elements.levelChart, {
-      Amazing: recent.filter(i => i.level === "green").length,
-      Okay: amberItems,
-      "Bad day": redItems
+      Green: recent.filter(i => i.level === "green").length,
+      Amber: amberItems,
+      Red: redItems
     });
 
     drawChart(elements.coinChart, {
@@ -3066,11 +3091,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const coinsLost = Math.abs(recent.reduce((sum, item) => sum + Math.min(0, item.coinChange), 0));
 
     return [
-      "Child weekly report",
+      "Together Steps weekly report",
       "",
-      `Amazing logs: ${recent.filter(i => i.level === "green").length}`,
-      `Okay logs: ${recent.filter(i => i.level === "amber").length}`,
-      `Bad day logs: ${recent.filter(i => i.level === "red").length}`,
+      `Green logs: ${recent.filter(i => i.level === "green").length}`,
+      `Amber logs: ${recent.filter(i => i.level === "amber").length}`,
+      `Red logs: ${recent.filter(i => i.level === "red").length}`,
       `Coins gained: ${coinsGained}`,
       `Coins lost: ${coinsLost}`,
       `Rewards claimed: ${recent.filter(i => i.type === "reward").length}`,
@@ -3131,87 +3156,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .replaceAll(">", "&gt;");
   }
 
-
-  function getStoredProfilePhoto() {
-    return localStorage.getItem(PROFILE_PHOTO_KEY) || "";
-  }
-
-  function updateProfilePhotoDisplay() {
-    const photo = getStoredProfilePhoto();
-
-    if (elements.profilePhotoPreview) {
-      if (photo) {
-        elements.profilePhotoPreview.src = photo;
-        elements.profilePhotoPreview.hidden = false;
-      } else {
-        elements.profilePhotoPreview.removeAttribute("src");
-        elements.profilePhotoPreview.hidden = true;
-      }
-    }
-
-    if (elements.profilePhotoPlaceholder) {
-      elements.profilePhotoPlaceholder.hidden = Boolean(photo);
-    }
-  }
-
-  function resizeImageToDataUrl(file, maxSize = 512) {
-    return new Promise((resolve, reject) => {
-      if (!file || !file.type || !file.type.startsWith("image/")) {
-        reject(new Error("Choose an image file."));
-        return;
-      }
-
-      const reader = new FileReader();
-
-      reader.onerror = () => reject(new Error("Could not read that image."));
-      reader.onload = () => {
-        const image = new Image();
-        image.onerror = () => reject(new Error("Could not load that image."));
-        image.onload = () => {
-          const sourceSize = Math.min(image.naturalWidth || image.width, image.naturalHeight || image.height);
-          const sourceX = Math.max(0, ((image.naturalWidth || image.width) - sourceSize) / 2);
-          const sourceY = Math.max(0, ((image.naturalHeight || image.height) - sourceSize) / 2);
-          const canvas = document.createElement("canvas");
-          canvas.width = maxSize;
-          canvas.height = maxSize;
-          const context = canvas.getContext("2d");
-          context.fillStyle = "#ffffff";
-          context.fillRect(0, 0, maxSize, maxSize);
-          context.drawImage(image, sourceX, sourceY, sourceSize, sourceSize, 0, 0, maxSize, maxSize);
-          resolve(canvas.toDataURL("image/jpeg", 0.86));
-        };
-        image.src = reader.result;
-      };
-
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async function saveProfilePhotoFromInput(event) {
-    const file = event?.target?.files?.[0];
-
-    if (!file) {
-      return;
-    }
-
-    try {
-      const dataUrl = await resizeImageToDataUrl(file);
-      localStorage.setItem(PROFILE_PHOTO_KEY, dataUrl);
-      updateProfilePhotoDisplay();
-    } catch (error) {
-      alert(error.message || "Could not save that photo.");
-    } finally {
-      if (elements.profilePhotoInput) {
-        elements.profilePhotoInput.value = "";
-      }
-    }
-  }
-
-  function removeProfilePhoto() {
-    localStorage.removeItem(PROFILE_PHOTO_KEY);
-    updateProfilePhotoDisplay();
-  }
-
   function notificationSupported() {
     return "Notification" in window && "serviceWorker" in navigator;
   }
@@ -3222,7 +3166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=51");
+      serviceWorkerRegistration = await navigator.serviceWorker.register("./sw.js?v=ts-layout-1");
       await navigator.serviceWorker.ready;
       return serviceWorkerRegistration;
     } catch (error) {
@@ -3374,9 +3318,7 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.parentPageUnlockButton.addEventListener("click", async () => { await verifyParentPin("unlock parent page"); });
     elements.settingsUnlockButton.addEventListener("click", async () => { await verifyParentPin("unlock settings"); });
 
-    if (elements.themeSelect) {
-      elements.themeSelect.addEventListener("change", event => setTheme(event.target.value));
-    }
+    elements.themeSelect.addEventListener("change", event => setTheme(event.target.value));
 
     elements.deduct5Button.addEventListener("click", () => adjustCoins(-5));
     elements.deduct10Button.addEventListener("click", () => adjustCoins(-10));
@@ -3397,14 +3339,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     elements.enableNotificationsButton.addEventListener("click", enableNotifications);
     elements.settingsEnableNotificationsButton.addEventListener("click", enableNotifications);
-
-    if (elements.profilePhotoInput) {
-      elements.profilePhotoInput.addEventListener("change", saveProfilePhotoFromInput);
-    }
-
-    if (elements.removeProfilePhotoButton) {
-      elements.removeProfilePhotoButton.addEventListener("click", removeProfilePhoto);
-    }
 
     elements.saveQuickLogButton.addEventListener("click", saveQuickDailyLog);
 
@@ -3457,6 +3391,17 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.saveCoinSettingsButton.addEventListener("click", saveCoinSettings);
     elements.changePinButton.addEventListener("click", changePin);
 
+    if (elements.profilePhotoInput) {
+      elements.profilePhotoInput.addEventListener("change", event => {
+        const file = event.target.files && event.target.files[0];
+        saveProfilePhotoFromFile(file);
+      });
+    }
+
+    if (elements.removeProfilePhotoButton) {
+      elements.removeProfilePhotoButton.addEventListener("click", removeProfilePhoto);
+    }
+
     elements.exportDataButton.addEventListener("click", exportData);
     elements.resetCoinsButton.addEventListener("click", resetCoins);
     elements.clearAllDataButton.addEventListener("click", clearAllData);
@@ -3464,13 +3409,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("offline", () => setSyncStatus("Saved on this device", "offline"));
   }
 
-  setTheme();
+  setTheme(getCurrentTheme());
   connectEvents();
   setupServiceWorker().finally(updateNotificationStatus);
   if (timerState.running) {
     startTimerTick();
   }
   updateDisplay();
-  updateProfilePhotoDisplay();
   initLocalOnlyMode();
 });

@@ -1,7 +1,5 @@
 App name: Together Steps
 Package name: com.childparent.app
-Theme: plain fixed theme
-Personal branding: none
-Child images: none
-
-Local-only test build: no cloud sync.
+Build type: local-only web/PWA test app
+Cloud sync: not included
+Personal names/branding: not included

@@ -1,14 +1,6 @@
-# Local-only setup for Together Steps
+# Local-only setup
 
-This test version does not use Firebase.
-
-Data is saved on the device/browser using local storage. That means:
-
-- No Firebase project is needed.
-- No Firestore rules are needed.
-- No parent account sign-in is needed.
-- Data will not sync between phones.
-- Clearing browser/app data can delete the saved test data.
+This Together Steps test app does not use Firebase or cloud sync.
 
 Upload these files together to your test host or GitHub Pages:
 
@@ -19,5 +11,8 @@ Upload these files together to your test host or GitHub Pages:
 - sw.js
 - icon.png
 - icon-192.png
+- together-steps-branding.png
 - README.md
 - LOCAL_ONLY_SETUP.md
+
+Data is saved locally on the device/browser only.
